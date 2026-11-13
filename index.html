@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NewsMaker Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f4f7ff;--mut:#b4c0e0;--g:rgba(255,255,255,.09);--gb:rgba(255,255,255,.2);--bg:#060d20;--a1:#2b5cff;--a2:#ff3d6e;--a3:#19d3c5;--in:rgba(0,0,0,.25);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--ink:#0b1b3a;--mut:#4a5a7d;--g:rgba(255,255,255,.55);--gb:rgba(255,255,255,.95);--bg:#e6edfb;--in:rgba(255,255,255,.7);color-scheme:light}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Bengali",system-ui,sans-serif;font-size:15px;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(420px 360px at 8% 4%,var(--a1),transparent 70%),radial-gradient(380px 380px at 100% 30%,var(--a2),transparent 70%),radial-gradient(420px 420px at 20% 100%,var(--a3),transparent 70%);opacity:.5;filter:blur(30px)}
+main{max-width:560px;margin:auto;padding:22px 16px 130px;display:flex;flex-direction:column;gap:14px}
+.glass,.box{background:var(--g);backdrop-filter:blur(24px) saturate(1.7);-webkit-backdrop-filter:blur(24px) saturate(1.7);border:1px solid var(--gb);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 40px rgba(0,0,0,.28);border-radius:26px}
+.box{padding:14px}
+h1{margin:6px 0 0;font-size:32px;font-weight:800;text-align:center;letter-spacing:-.5px}
+h1 span{background:linear-gradient(90deg,#5aa2ff,#19d3c5,#ff6b9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0;text-align:center;color:var(--mut)}
+.pill{display:flex;gap:6px;padding:6px;border-radius:999px}
+.pill input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;padding:0 14px;outline:0}
+.go,.btn{border:0;font:inherit;font-weight:800;color:#fff;cursor:pointer;border-radius:999px;padding:12px 18px;background:linear-gradient(135deg,#3d8bff,#6a5cff);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 8px 20px rgba(61,139,255,.4)}
+.btn.hot{background:linear-gradient(135deg,#ff5f6d,#ff2d6a);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 8px 20px rgba(255,45,106,.4)}
+.btn:active,.go:active{transform:scale(.96)}.btn:disabled,.go:disabled{opacity:.5}
+.lnk{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;align-self:center}
+#msg{text-align:center;color:var(--mut);font-size:13px;min-height:18px}
+.bar{height:6px;border-radius:6px;background:var(--in);overflow:hidden;display:none}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3d8bff,#19d3c5)}
+.phone{position:relative;margin:0 auto;padding:12px;border-radius:48px;background:linear-gradient(145deg,#2c3556,#080c19);box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.18);max-width:100%}
+.phone::before{content:"";position:absolute;top:19px;left:50%;transform:translateX(-50%);width:84px;height:22px;border-radius:12px;background:#000;z-index:2}
+canvas{display:block;max-width:100%;max-height:58vh;border-radius:36px;background:#000}
+.thumbs{display:flex;gap:8px;overflow-x:auto;justify-content:center;min-height:0}
+.thumbs img{width:54px;height:54px;object-fit:cover;border-radius:14px;border:2px solid transparent;cursor:pointer}.thumbs img.on{border-color:#fff}
+.lbl{font-size:12.5px;color:var(--mut);font-weight:700;margin:4px 0 8px}
+.icons{display:flex;gap:6px;justify-content:space-around;margin-bottom:8px}
+.app{background:none;border:0;color:var(--ink);font:inherit;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:4px}
+.ico{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;font-size:28px;position:relative;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 8px 18px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.7),inset 0 -6px 12px rgba(0,0,0,.2);transition:.2s}
+.ico::after{content:"";position:absolute;inset:2px 2px 50% 2px;border-radius:16px 16px 50% 50%;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.04))}
+.app.on .ico{transform:scale(1.1);outline:3px solid #fff;outline-offset:2px}.app:active .ico{transform:scale(.92)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.acts .hot{grid-column:1/3}
+label{display:block;font-size:12.5px;color:var(--mut);font-weight:700;margin:10px 0 5px}
+input:not(.pill input),select,textarea{width:100%;padding:11px 12px;border:1px solid var(--gb);border-radius:16px;background:var(--in);color:var(--ink);font:inherit}
+textarea{min-height:90px;resize:vertical}input[type=color]{height:44px;padding:3px}input[type=file]{padding:9px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.logo-tile{display:flex;align-items:center;gap:14px;cursor:pointer}
+.logo-tile .ico{--c1:#ffffff55;--c2:#ffffff22;background-size:cover;background-position:center}
+video{width:100%;max-height:60vh;border-radius:26px;background:#000}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:14px;padding:10px 16px;border-radius:34px;z-index:5}
+.hint{font-size:12.5px;color:var(--mut);line-height:1.55;margin:8px 0 0}
+</style>
+</head>
+<body>
+<main>
+<div id="v-create" style="display:flex;flex-direction:column;gap:14px">
+  <h1>NewsMaker <span>Studio</span></h1>
+  <p class="sub">খবরের লিংক দিন — কার্ড আর রিল রেডি ✨</p>
+  <div class="glass pill"><input id="src" placeholder="🔗 খবর বা ভিডিওর লিংক পেস্ট করুন" inputmode="url"><button class="go" id="fetchb">✨ বানান</button></div>
+  <button class="lnk" id="demo">নমুনা দিয়ে দেখুন (ডেমো)</button>
+  <div id="msg"></div><div class="bar" id="bar"><i id="bi"></i></div>
+  <div class="phone"><canvas id="cv" width="1080" height="1350"></canvas></div>
+  <div class="thumbs" id="th"></div>
+  <div class="box glass"><label style="margin-top:0">শিরোনাম (প্রকাশের আগে মিলিয়ে নিন)</label><textarea id="hl">এখানে খবরের শিরোনাম বসবে</textarea>
+    <label>নিজের ছবি যোগ করুন (ঐচ্ছিক)</label><input type="file" id="media" accept="image/*" multiple></div>
+  <div class="box glass"><div class="lbl">টেমপ্লেট</div><div class="icons" id="tp"></div><div class="lbl">ফরম্যাট</div><div class="icons" id="fm"></div></div>
+  <div class="box glass acts"><button class="btn" id="dl">⬇️ PNG</button><button class="btn" id="dl2">⬇️ JPG</button><button class="btn hot" id="mk">🎬 রিল বানান</button></div>
+  <video id="out" controls playsinline hidden></video>
+  <a id="vdl" class="btn" hidden style="text-decoration:none;text-align:center" download>⬇️ ভিডিও ডাউনলোড</a>
+</div>
+<div id="v-brand" hidden style="display:none;flex-direction:column;gap:14px">
+  <h1>আমার <span>ব্র্যান্ড</span></h1><p class="sub">সব কার্ড ও রিলে এটাই বসবে</p>
+  <div class="box glass">
+    <label style="margin-top:0">চ্যানেলের নাম</label><input id="ch" value="দেশ ওয়ান টিভি">
+    <label>লোগো</label><label class="logo-tile" style="margin:0"><span class="ico" id="lp">🖼️</span><input type="file" id="logo" accept="image/*"></label>
+    <div class="row"><div><label>প্রাইমারি রং</label><input type="color" id="c1" value="#1d6bff"></div><div><label>সেকেন্ডারি রং</label><input type="color" id="c2" value="#e11d2e"></div></div>
+    <label>ট্যাগ লেবেল</label><input id="tag" value="ব্রেকিং নিউজ">
+    <label>টিকার টেক্সট</label><input id="tick" value="সর্বশেষ খবরের জন্য আমাদের সাথেই থাকুন">
+  </div>
+  <div class="box glass"><div class="row"><div><label style="margin-top:0">রিলের সময়</label><select id="dur"><option value="8">৮ সেকেন্ড</option><option value="12" selected>১২ সেকেন্ড</option><option value="20">২০ সেকেন্ড</option></select></div>
+    <div><label style="margin-top:0">মিউজিক</label><select id="mm"><option value="auto">অটো মিউজিক</option><option value="file">নিজের ফাইল</option><option value="none">মিউজিক নেই</option></select></div></div>
+    <input type="file" id="mus" accept="audio/*" hidden style="margin-top:10px"><p class="hint">অটো মিউজিক নিজে তৈরি হয় (কপিরাইট-মুক্ত)।</p></div>
+  <button class="btn" id="save">💾 ব্র্যান্ডিং সেভ করুন</button><div id="msg2" class="sub"></div>
+</div>
+</main>
+<nav class="dock glass"><button class="app on" data-v="create"><span class="ico" style="--c1:#5aa2ff;--c2:#2b5cff">✨</span>তৈরি</button><button class="app" data-v="brand"><span class="ico" style="--c1:#ff9ad5;--c2:#a259ff">🎨</span>ব্র্যান্ড</button></nav>
+<script>
+const $=id=>document.getElementById(id),cv=$('cv'),cx=cv.getContext('2d'),FONT='"Noto Sans Bengali",sans-serif';
+let photos=[],pick=0,logo=null,fmt='1080x1350',tpl='1',busy=false,S={a:null,b:null,mix:0};
+const msg=t=>$('msg').textContent=t;
+// icon pickers
+const TP=[['1','📰','ব্রেকিং','#ff6b7a','#e11d2e'],['2','🗞️','ক্লাসিক','#5aa2ff','#1d6bff'],['3','🤍','মিনিমাল','#b79bff','#7b5cff']];
+const FM=[['1080x1350','📱','পোস্ট','#5ee7a0','#12a05c'],['1080x1080','⬜','স্কয়ার','#ffd166','#f59e0b'],['1200x675','🖥️','ল্যান্ডস্কেপ','#5ad1ff','#0e8bd6'],['1080x1920','🎞️','রিল','#ff8fd0','#d6249f']];
+function icons(el,list,get,set){el.innerHTML='';list.forEach(x=>{const b=document.createElement('button');b.className='app'+(get()===x[0]?' on':'');b.innerHTML=`<span class="ico" style="--c1:${x[3]};--c2:${x[4]}">${x[1]}</span>${x[2]}`;b.onclick=()=>{set(x[0]);drawIcons();render()};el.appendChild(b)})}
+function drawIcons(){icons($('tp'),TP,()=>tpl,v=>tpl=v);icons($('fm'),FM,()=>fmt,v=>fmt=v)}
+// nav
+document.querySelectorAll('.dock .app').forEach(b=>b.onclick=()=>{document.querySelectorAll('.dock .app').forEach(x=>x.classList.toggle('on',x===b));['create','brand'].forEach(v=>$('v-'+v).style.display=v===b.dataset.v?'flex':'none')});
+// branding persistence
+try{const s=JSON.parse(localStorage.getItem('nm_brand')||'{}');['ch','c1','c2','tag','tick'].forEach(k=>{if(s[k])$(k).value=s[k]});if(s.logo)setLogo(s.logo)}catch(e){}
+function setLogo(d){logo=new Image();logo.onload=render;logo.src=d;$('lp').textContent='';$('lp').style.backgroundImage=`url(${d})`}
+$('save').onclick=()=>{try{const s={};['ch','c1','c2','tag','tick'].forEach(k=>s[k]=$(k).value);if(logo&&logo.src.startsWith('data:'))s.logo=logo.src;localStorage.setItem('nm_brand',JSON.stringify(s));$('msg2').textContent='✅ সেভ হয়েছে'}catch(e){$('msg2').textContent='সেভ করা যায়নি (লোগো বড় হতে পারে)'}};
+const rd=(f,cb)=>{const r=new FileReader();r.onload=()=>cb(r.result);r.readAsDataURL(f)};
+$('logo').onchange=e=>{const f=e.target.files[0];if(f)rd(f,setLogo)};
+$('mm').onchange=()=>{$('mus').hidden=$('mm').value!=='file'};
+$('media').onchange=e=>{[...e.target.files].reverse().forEach(f=>rd(f,d=>addPhoto(d,true)))};
+['ch','hl','tag','tick','c1','c2'].forEach(k=>$(k).addEventListener('input',()=>{if(!busy)render()}));
+// photos
+function addPhoto(u,front){const im=new Image();im.onload=()=>{if(im.naturalWidth<400)return;front?photos.unshift(im):photos.push(im);if(front)pick=0;thumbs();render()};im.src=u}
+function thumbs(){const t=$('th');t.innerHTML='';photos.forEach((im,i)=>{const e=document.createElement('img');e.src=im.src;e.className=i===pick?'on':'';e.onclick=()=>{pick=i;thumbs();render()};t.appendChild(e)})}
+function sample(){photos=[];pick=0;['#1d6bff,#19d3c5','#ff3d6e,#ffb347','#7b5cff,#2ad4ff'].forEach((p,i)=>{const c=document.createElement('canvas');c.width=1200;c.height=1600;const x=c.getContext('2d'),[a,b]=p.split(','),g=x.createLinearGradient(0,0,1200,1600);g.addColorStop(0,a);g.addColorStop(1,b);x.fillStyle=g;x.fillRect(0,0,1200,1600);for(let k=0;k<9;k++){x.fillStyle=`rgba(255,255,255,${.05+.04*(k%3)})`;x.beginPath();x.arc((k*397+i*211)%1200,(k*521+i*307)%1600,120+k*30,0,7);x.fill()}addPhoto(c.toDataURL())});$('hl').value='নমুনা শিরোনাম: এখানে আপনার খবরের শিরোনাম বসবে, নিচে চ্যানেলের নাম ও লোগো';msg('ডেমো নমুনা — আসল খবরের জন্য লিংক দিন');render()}
+$('demo').onclick=sample;
+$('fetchb').onclick=async()=>{const u=$('src').value.trim(),b=$('fetchb');if(!/^https?:\/\//.test(u)){msg('আগে খবরের লিংক দিন');return}
+  msg('খবর আনা হচ্ছে…');b.disabled=true;
+  try{const r=await fetch('/api/extract?url='+encodeURIComponent(u));const d=await r.json().catch(()=>({}));if(!r.ok||!d.title&&!(d.images||[]).length)throw new Error(d.error||'সার্ভার পাওয়া যায়নি');
+    photos=[];pick=0;thumbs();if(d.title)$('hl').value=d.title;(d.images||[]).forEach(i=>addPhoto('/api/img?url='+encodeURIComponent(i)));render();msg('✅ '+(d.site||'')+' থেকে আনা হয়েছে — ছবি বেছে নিন, শিরোনাম মিলিয়ে নিন, তারপর ডাউনলোড বা রিল')}
+  catch(e){msg('❌ '+e.message+' — লিংক থেকে আনার জন্য ওয়েবসাইট সার্ভারে ডিপ্লয় করতে হয়। এখন নমুনা দেখুন বা হাতে লিখুন।')}
+  b.disabled=false};
+// drawing
+function ci(im,x,y,w,h,z){const iw=im.naturalWidth,ih=im.naturalHeight;if(!iw)return;const k=Math.max(w/iw,h/ih)*z;cx.save();cx.beginPath();cx.rect(x,y,w,h);cx.clip();cx.drawImage(im,x+(w-iw*k)/2,y+(h-ih*k)/2,iw*k,ih*k);cx.restore()}
+function cover(x,y,w,h,z){if(!S.a)return;ci(S.a,x,y,w,h,z);if(S.b&&S.mix>0){cx.globalAlpha=S.mix;ci(S.b,x,y,w,h,z);cx.globalAlpha=1}}
+function wrap(t,mw){const out=[];t.split(/\n/).forEach(p=>{let l='';p.split(/\s+/).forEach(w=>{const n=l?l+' '+w:w;if(cx.measureText(n).width>mw&&l){out.push(l);l=w}else l=n});out.push(l)});return out}
+function fit(t,mw,maxH,max,min,wt){let s=max,L;for(;s>=min;s-=2){cx.font=`${wt} ${s}px ${FONT}`;L=wrap(t,mw);if(L.length*s*1.3<=maxH)break}return{s,L}}
+const rr=(x,y,w,h,r)=>{cx.beginPath();cx.roundRect(x,y,w,h,r)};
+function footer(W,H,u,o){const fh=130*u,y=H-fh;const g=cx.createLinearGradient(0,y,W,y);g.addColorStop(0,o.c1);g.addColorStop(1,'#0b1b3a');cx.fillStyle=g;cx.fillRect(0,y,W,fh);
+  let x=36*u;if(logo&&logo.naturalWidth){const d=86*u,yy=y+(fh-d)/2;cx.save();rr(x,yy,d,d,d/2);cx.clip();cx.fillStyle='#fff';cx.fillRect(x,yy,d,d);const k=Math.min(d/logo.naturalWidth,d/logo.naturalHeight);cx.drawImage(logo,x+(d-logo.naturalWidth*k)/2,yy+(d-logo.naturalHeight*k)/2,logo.naturalWidth*k,logo.naturalHeight*k);cx.restore();x+=d+20*u}
+  cx.fillStyle='#fff';cx.textBaseline='middle';cx.font=`800 ${44*u}px ${FONT}`;cx.fillText(o.ch,x,y+fh/2-(o.tick?14*u:0));
+  if(o.tick){cx.font=`500 ${24*u}px ${FONT}`;cx.globalAlpha=.85;let t=o.tick;const mw=W-x-36*u;while(cx.measureText(t).width>mw&&t.length>3)t=t.slice(0,-2);cx.fillText(t,x,y+fh/2+28*u);cx.globalAlpha=1}
+  cx.textBaseline='alphabetic';return y}
+function pill(x,y,u,o){cx.font=`800 ${30*u}px ${FONT}`;const w=cx.measureText(o.tag).width+44*u,h=56*u;cx.fillStyle=o.c2;rr(x,y-h,w,h,28*u);cx.fill();cx.fillStyle='#fff';cx.textBaseline='middle';cx.fillText(o.tag,x+22*u,y-h/2+2*u);cx.textBaseline='alphabetic'}
+function draw(W,H,o,zoom,p){const u=Math.min(W,H*.8)/1080,pad=56*u,hasM=!!S.a;cx.clearRect(0,0,W,H);const slide=(1-p)*70*u;
+  const g=cx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#0b1b3a');g.addColorStop(1,o.c1);
+  if(o.tpl==='1'){cx.fillStyle=g;cx.fillRect(0,0,W,H);cover(0,0,W,H,zoom);const gr=cx.createLinearGradient(0,H*.3,0,H);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(.75,'rgba(0,0,0,.92)');cx.fillStyle=gr;cx.fillRect(0,H*.3,W,H*.7);
+    const fy=footer(W,H,u,o);cx.save();cx.globalAlpha=p;cx.translate(0,slide);const f=fit(o.hl,W-pad*2,H*.38,84*u,36*u,800);cx.font=`800 ${f.s}px ${FONT}`;cx.fillStyle='#fff';const y=fy-40*u-(f.L.length-1)*f.s*1.3;f.L.forEach((l,i)=>cx.fillText(l,pad,y+i*f.s*1.3));pill(pad,y-f.s-12*u,u,o);cx.restore()}
+  else if(o.tpl==='2'){cx.fillStyle='#0b1b3a';cx.fillRect(0,0,W,H);const ph=H*.55;cx.fillStyle=g;cx.fillRect(0,0,W,ph);cover(0,0,W,ph,zoom);cx.fillStyle=o.c2;cx.fillRect(0,ph,W,10*u);const fy=footer(W,H,u,o);pill(pad,ph+94*u,u,o);
+    cx.save();cx.globalAlpha=p;cx.translate(0,slide);const top=ph+120*u,f=fit(o.hl,W-pad*2,fy-top-20*u,76*u,32*u,800);cx.font=`800 ${f.s}px ${FONT}`;cx.fillStyle='#fff';f.L.forEach((l,i)=>cx.fillText(l,pad,top+f.s+i*f.s*1.3));cx.restore()}
+  else{cx.fillStyle='#f3f6fc';cx.fillRect(0,0,W,H);cx.fillStyle=o.c1;cx.fillRect(0,0,W,14*u);const fy=footer(W,H,u,o),ph=H*.46,px=pad,py=60*u,pw=W-pad*2;
+    cx.fillStyle=o.c1;cx.globalAlpha=.15;rr(px,py,pw,ph,28*u);cx.fill();cx.globalAlpha=1;if(hasM){cx.save();rr(px,py,pw,ph,28*u);cx.clip();cover(px,py,pw,ph,zoom);cx.restore()}
+    pill(px,py+ph+76*u,u,o);cx.save();cx.globalAlpha=p;cx.translate(0,slide);const top=py+ph+110*u,f=fit(o.hl,pw,fy-top-20*u,72*u,30*u,800);cx.font=`800 ${f.s}px ${FONT}`;cx.fillStyle='#0b1b3a';f.L.forEach((l,i)=>cx.fillText(l,px,top+f.s+i*f.s*1.3));cx.restore()}}
+const opts=()=>({ch:$('ch').value,hl:$('hl').value,tpl,c1:$('c1').value,c2:$('c2').value,tag:$('tag').value,tick:$('tick').value});
+function render(){if(busy)return;const[W,H]=fmt.split('x').map(Number);if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}S={a:photos[pick]||null,b:null,mix:0};draw(W,H,opts(),1,1)}
+drawIcons();document.fonts.load(`800 40px ${FONT}`).then(()=>document.fonts.load(`500 40px ${FONT}`)).then(render).catch(render);document.fonts.ready.then(render);
+function dl(type,ext){render();const a=document.createElement('a');a.download='newsmaker-card.'+ext;a.href=cv.toDataURL(type,.95);a.click()}
+$('dl').onclick=()=>dl('image/png','png');$('dl2').onclick=()=>dl('image/jpeg','jpg');
+// auto music (generated, royalty-free)
+function synth(a,d,dur){const m=a.createGain();m.gain.value=.3;m.connect(d);const n=(f,t,l,ty,v)=>{const o=a.createOscillator(),g=a.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+l);o.connect(g);g.connect(m);o.start(t);o.stop(t+l+.05)};
+  const t0=a.currentTime+.05,bt=.3,A=[220,261.63,329.63,261.63,196,246.94,293.66,246.94];
+  for(let i=0;i*bt<dur;i++){const t=t0+i*bt;n(A[(Math.floor(i/4)%2)*4+i%4],t,.28,'triangle',.5);if(i%4==0)n(i%8<4?110:98,t,1.1,'sine',.9);if(i%2==0)n(60,t,.15,'sine',1)}n(880,t0,.6,'sine',.5)}
+// reel from fetched photos
+$('mk').onclick=async()=>{
+  if(busy)return;if(!window.MediaRecorder){msg('এই ব্রাউজারে রিল রেকর্ডিং নেই — Chrome ব্যবহার করুন');return}
+  const prev=fmt;fmt='1080x1920';render();busy=true;const sc=photos.slice(0,4),dur=+$('dur').value,o=opts();
+  $('mk').disabled=true;$('out').hidden=true;$('vdl').hidden=true;$('bar').style.display='block';msg('রিল তৈরি হচ্ছে… ট্যাব খোলা রাখুন');
+  const stream=cv.captureStream(30);let actx=null,au=null;const mode=$('mm').value;
+  try{if(mode!=='none'){actx=new(window.AudioContext||window.webkitAudioContext)();const d=actx.createMediaStreamDestination();
+    if(mode==='file'&&$('mus').files[0]){au=new Audio(URL.createObjectURL($('mus').files[0]));au.loop=true;actx.createMediaElementSource(au).connect(d)}else synth(actx,d,dur);
+    d.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}}catch(e){}
+  const mime=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+  const rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:6e6}:{}),ch=[];rec.ondataavailable=e=>e.data.size&&ch.push(e.data);
+  rec.onstop=()=>{const type=rec.mimeType||'video/webm',mp=type.includes('mp4'),url=URL.createObjectURL(new Blob(ch,{type}));$('out').src=url;$('out').hidden=false;const a=$('vdl');a.href=url;a.download='newsmaker-reel.'+(mp?'mp4':'webm');a.textContent='⬇️ রিল ডাউনলোড ('+(mp?'MP4':'WebM')+')';a.hidden=false;$('bar').style.display='none';msg('✅ রিল তৈরি হয়েছে');busy=false;$('mk').disabled=false;if(au)au.pause();if(actx)actx.close();fmt=prev;drawIcons();render()};
+  rec.start(250);if(au)au.play().catch(()=>{});const t0=performance.now(),n=Math.max(1,sc.length),len=dur/n;
+  (function loop(){const t=(performance.now()-t0)/1000;if(t>=dur){rec.stop();return}
+    const i=Math.min(n-1,Math.floor(t/len)),lt=t-i*len;S={a:sc[i]||null,b:sc[i+1]||null,mix:Math.max(0,(lt-(len-.6))/.6)};
+    draw(1080,1920,o,1+.1*(lt/len),Math.min(1,lt/.8));$('bi').style.width=(t/dur*100)+'%';requestAnimationFrame(loop)})();
+};
+</script>
+</body>
+</html>
