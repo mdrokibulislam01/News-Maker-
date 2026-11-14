@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NewsMaker Studio — নিউজ ফটোকার্ড ও রিল মেকার</title>
+<meta name="description" content="খবর বা ভিডিওর লিংক দিন, নিজে থেকে নিউজ ফটোকার্ড ও রিল তৈরি হবে। Ultra HD ডাউনলোড, ফেসবুকের জন্য সেরা মাপ, SEO ক্যাপশন ও হ্যাশট্যাগ।">
+<meta property="og:title" content="NewsMaker Studio — নিউজ ফটোকার্ড ও রিল মেকার"><meta property="og:description" content="লিংক দিন, Ultra HD নিউজ ফটোকার্ড ও রিল রেডি।"><meta property="og:type" content="website"><meta name="theme-color" content="#060d20">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500;700;800&family=Hind+Siliguri:wght@500;700&family=Noto+Serif+Bengali:wght@500;800&family=Baloo+Da+2:wght@500;800&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f4f7ff;--mut:#b4c0e0;--g:rgba(255,255,255,.09);--gb:rgba(255,255,255,.2);--bg:#060d20;--a1:#2b5cff;--a2:#ff3d6e;--a3:#19d3c5;--in:rgba(0,0,0,.25);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--ink:#0b1b3a;--mut:#4a5a7d;--g:rgba(255,255,255,.55);--gb:rgba(255,255,255,.95);--bg:#e6edfb;--in:rgba(255,255,255,.7);color-scheme:light}}
+html,body,main{overflow-anchor:none}html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Bengali",system-ui,sans-serif;font-size:15px;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(420px 360px at 8% 4%,var(--a1),transparent 70%),radial-gradient(380px 380px at 100% 30%,var(--a2),transparent 70%),radial-gradient(420px 420px at 20% 100%,var(--a3),transparent 70%);opacity:.5;filter:blur(30px)}
+main{max-width:1180px;margin:auto;padding:18px 14px 130px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start}
+@media(max-width:899px){.sticky{background:linear-gradient(180deg,var(--bg) 80%,transparent);padding:2px 0 6px}}
+@media(min-width:900px){main{grid-template-columns:minmax(0,540px) minmax(0,1fr)}.head{grid-column:1/3}.sticky{top:16px!important}canvas{max-height:84vh!important}}
+.head{display:flex;flex-direction:column;gap:10px}.langs{display:flex;justify-content:flex-end;gap:4px}.langs button{border:1px solid var(--gb);background:var(--g);color:var(--ink);font:inherit;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;cursor:pointer;backdrop-filter:blur(14px)}.langs button.on{background:linear-gradient(135deg,#3d8bff,#6a5cff);color:#fff;border-color:transparent}
+.glass,.box{background:var(--g);backdrop-filter:blur(24px) saturate(1.7);-webkit-backdrop-filter:blur(24px) saturate(1.7);border:1px solid var(--gb);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 40px rgba(0,0,0,.28);border-radius:26px}
+.box{padding:14px}
+h1{margin:4px 0 0;font-size:30px;font-weight:800;text-align:center}h1 span{background:linear-gradient(90deg,#5aa2ff,#19d3c5,#ff6b9a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0;text-align:center;color:var(--mut)}
+.pill{display:flex;gap:6px;padding:6px;border-radius:999px}.pill input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;padding:0 14px;outline:0}
+.go,.btn{border:0;font:inherit;font-weight:800;color:#fff;cursor:pointer;border-radius:999px;padding:12px 18px;background:linear-gradient(135deg,#3d8bff,#6a5cff);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 8px 20px rgba(61,139,255,.4)}
+.btn.hot{background:linear-gradient(135deg,#ff5f6d,#ff2d6a);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 8px 20px rgba(255,45,106,.4)}
+.btn:active,.go:active{transform:scale(.96)}.btn:disabled,.go:disabled{opacity:.5}
+.lnk{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer}
+#msg{text-align:center;color:var(--mut);font-size:13px;min-height:18px}
+.bar{height:6px;border-radius:6px;background:var(--in);overflow:hidden;display:none;margin-top:8px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3d8bff,#19d3c5)}
+.sticky{position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px}
+.phone{position:relative;padding:8px;border-radius:40px;background:linear-gradient(145deg,#2c3556,#080c19);box-shadow:0 24px 50px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,255,255,.18);max-width:100%}
+.phone::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:70px;height:18px;border-radius:12px;background:#000;z-index:2}
+canvas{display:block;max-width:100%;max-height:52vh;border-radius:30px;background:#000;touch-action:none;cursor:grab}
+.thumbs{display:flex;gap:8px;overflow-x:auto;max-width:100%}.thumbs img{width:48px;height:48px;object-fit:cover;border-radius:12px;border:2px solid transparent;cursor:pointer;flex:none}.thumbs img.on{border-color:#fff}
+.side{display:flex;flex-direction:column;gap:14px}
+.lbl{font-size:13px;color:var(--mut);font-weight:700;margin:6px 0 8px;display:flex;align-items:center}
+.st{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#3d8bff,#19d3c5);color:#fff;font-size:12px;margin-right:8px;flex:none}
+.icons{display:flex;gap:4px;justify-content:space-around;flex-wrap:wrap;margin-bottom:6px}
+.app{background:none;border:0;color:var(--ink);font:inherit;font-size:11.5px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:4px}
+.ico{width:56px;height:56px;border-radius:17px;display:grid;place-items:center;font-size:26px;position:relative;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 8px 18px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.7),inset 0 -6px 12px rgba(0,0,0,.2);transition:.2s;background-size:cover;background-position:center}
+.ico::after{content:"";position:absolute;inset:2px 2px 50% 2px;border-radius:15px 15px 50% 50%;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.04))}
+.app.on .ico{transform:scale(1.1);outline:3px solid #fff;outline-offset:2px}.app:active .ico{transform:scale(.92)}
+label{display:block;font-size:12.5px;color:var(--mut);font-weight:700;margin:10px 0 5px}
+input:not(.pill input):not([type=range]):not([type=checkbox]),select,textarea{width:100%;padding:10px 12px;border:1px solid var(--gb);border-radius:16px;background:var(--in);color:var(--ink);font:inherit}
+textarea{min-height:90px;resize:vertical}input[type=color]{height:42px;padding:3px}input[type=file]{padding:9px}input[type=range]{width:100%}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.chrow{display:flex;gap:12px;align-items:center}.chrow .ico{--c1:#ffffff66;--c2:#ffffff22;cursor:pointer;width:64px;height:64px}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.acts .hot{grid-column:1/3}
+.sws{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}.sw{width:38px;height:38px;border-radius:50%;border:2px solid #fff;cursor:pointer;padding:0}
+.chk{display:flex;gap:8px;align-items:center;font-size:13.5px;margin:10px 0 2px;color:var(--ink);font-weight:500}.chk input{width:18px;height:18px}
+.seg{display:flex;gap:6px}.seg button{flex:1;border:1px solid var(--gb);background:var(--in);color:var(--ink);font:inherit;font-weight:700;padding:9px 0;border-radius:14px;cursor:pointer}.seg button.on{background:linear-gradient(135deg,#3d8bff,#6a5cff);color:#fff;border-color:transparent}
+.lays{display:flex;gap:8px;flex-wrap:wrap}.lays button{display:flex;flex-direction:column;align-items:center;gap:4px;border:1px solid var(--gb);background:var(--in);color:var(--mut);font:inherit;font-size:11px;font-weight:700;padding:8px 6px;border-radius:14px;cursor:pointer;min-width:64px}.lays button.on{background:linear-gradient(135deg,#3d8bff,#6a5cff);color:#fff;border-color:transparent}
+.thumbs img.use{border-color:#19d3c5}#th2{margin:2px 0 8px;padding:2px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(128px + env(safe-area-inset-bottom,0px));background:rgba(10,20,50,.94);color:#fff;padding:10px 18px;border-radius:999px;font-size:13.5px;z-index:20;max-width:90vw;text-align:center;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
+video{width:100%;max-height:60vh;border-radius:22px;background:#000;margin-top:10px}#pv{max-height:32vh}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.chips button{border:1px solid var(--gb);background:var(--in);color:var(--ink);font:inherit;font-weight:700;padding:8px 14px;border-radius:999px;cursor:pointer}.chips button.on{background:linear-gradient(135deg,#3d8bff,#6a5cff);color:#fff;border-color:transparent}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;padding:8px 12px;border-radius:34px;z-index:6;max-width:calc(100vw - 16px)}
+.hint{font-size:12.5px;color:var(--mut);line-height:1.55;margin:8px 0 0}
+</style>
+</head>
+<body>
+<main>
+<div class="head"><div class="langs"><button id="lbn">বাংলা</button><button id="len">English</button></div><h1>NewsMaker <span>Studio</span></h1><p class="sub">খবর বা ভিডিওর লিংক দিন — কার্ড আর রিল রেডি ✨</p>
+  <div class="glass pill"><input id="src" placeholder="🔗 খবর / YouTube / Facebook লিংক" inputmode="url"><button class="go" id="fetchb">✨ বানান</button></div>
+  <div style="text-align:center"><button class="lnk" id="demo">নমুনা দিয়ে দেখুন</button></div><p class="hint" style="text-align:center;margin:0">YouTube, Facebook বা যেকোনো খবর/ভিডিও লিংক দিন। লিংক না চললে নিচে ভিডিও ফাইল দিন।</p><div id="msg"></div></div>
+<div class="sticky"><div class="phone"><canvas id="cv" width="1080" height="1350"></canvas></div><div class="thumbs" id="th"></div><p class="hint" style="text-align:center;margin:0">✋ লোগো বা স্টিকার ছবির ওপর টেনে সরান</p></div>
+<div class="side">
+
+<div id="v-create" class="side">
+  <div class="box glass"><div class="lbl" style="margin-top:0"><span class="st">১</span>ছবি / ভিডিও</div>
+    <label style="margin-top:0">নিজের ছবি যোগ করুন (ঐচ্ছিক)</label><input type="file" id="media" accept="image/*" multiple>
+    <label>ভিডিও ফাইল (ঐচ্ছিক) — ভিডিও থেকে কার্ডের ছবি আর রিল দুটোই হবে</label><input type="file" id="vidc" accept="video/*">
+    <div id="vp" hidden><video id="pv" controls playsinline muted></video>
+      <button class="btn" id="vcap" style="width:100%;margin-top:10px">📸 এই সেকেন্ডের ছবি কার্ডে নিন</button>
+      <div class="row" style="margin-top:10px"><button class="btn" id="vst">▶ রিল এখান থেকে শুরু</button><button class="btn" id="ven">⏹ এখানে শেষ</button></div>
+      <p class="hint" id="vinfo"></p></div>
+    <p class="hint">ওপরের বক্সে লিংক দিলে ছবি ও শিরোনাম নিজেই আসবে। নিচের ছোট ছবিতে চাপ দিয়ে পছন্দের ছবি বেছে নিন।</p><p class="hint" id="qn"></p>
+    <label>ছবির সাজানো — একটি কার্ডে ১ থেকে ৪ ছবি</label><div class="lays" id="lays"></div>
+    <div class="chips" id="slots" style="margin-top:10px"></div>
+    <label>ছবির পুল (ছোট ছবিতে চাপ দিলে নির্বাচিত ঘরে বসবে)</label><div class="thumbs" id="th2"></div>
+    <label>নির্বাচিত ছবির জুম</label><input type="range" id="pz" min="100" max="300" value="100">
+    <div class="row"><div><label>ডানে-বামে</label><input type="range" id="pxo" min="-100" max="100" value="0"></div><div><label>উপরে-নিচে</label><input type="range" id="pyo" min="-100" max="100" value="-50"></div></div>
+    <div style="margin-top:8px"><button class="lnk" id="pr">↺ রিসেট</button></div>
+    <p class="hint">💡 প্রিভিউতে ছবির ওপর আঙুল/মাউস টেনেও ছবি সরানো যায়। একসাথে অনেক ছবি আপলোড করলে নিজে থেকে কোলাজ হয়ে যাবে।</p></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0"><span class="st">২</span>শিরোনাম ও লেখা</div>
+    <textarea id="hl">এখানে আপনার খবরের
+শিরোনাম বসবে</textarea>
+    <p class="hint">নতুন লাইনের জন্য Enter চাপুন। কোনো শব্দে আলাদা রং দিতে সেটি *এভাবে* তারা চিহ্নের ভেতরে লিখুন।</p>
+    <label>বক্তার নাম / উপশিরোনাম (আলাদা লাইনে বসবে)</label><input id="sp" placeholder="যেমন: স্পিকার অমুক">
+    <div class="row"><div><label>নামের সাইজ</label><input type="range" id="sps" min="50" max="220" value="100"></div><div><label>নামের রং</label><input type="color" id="spc" value="#ffd66b"></div></div>
+    <label>লেখার সাইজ</label><input type="range" id="sc" min="40" max="180" value="100">
+    <label>লেখার অ্যালাইনমেন্ট</label><div class="seg" id="alg"><button data-al="left">বামে</button><button data-al="center">মাঝে</button><button data-al="right">ডানে</button></div><input type="hidden" id="al" value="center">
+    <label>লেখা উপরে-নিচে সরান</label><input type="range" id="ly" min="-200" max="200" value="0">
+    <label>লেখা ডানে-বামে সরান</label><input type="range" id="lxo" min="-300" max="300" value="0">
+    <label>শেষ লাইনে আলাদা রং</label><select id="hn"><option value="0">নেই</option><option value="1">শেষ ১ লাইন</option><option value="2">শেষ ২ লাইন</option></select>
+    <label class="chk"><input type="checkbox" id="qm">উদ্ধৃতি চিহ্ন (“) দেখান</label></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0"><span class="st">৩</span>টেমপ্লেট বেছে নিন</div><div class="icons" id="tp"></div><div class="lbl"><span class="st">৪</span>সাইজ</div><div class="icons" id="fm"></div>
+    <p class="hint" style="margin:0 0 8px">৪:৫ = Facebook/Instagram পোস্ট (সেরা) · ১:১ = স্কয়ার · ১৬:৯ = YouTube · ৯:১৬ = স্টোরি/রিল · Facebook লিংক = লিংক শেয়ারের ছবি</p><div class="row" id="cs" hidden><div><label>চওড়া (px)</label><input type="number" id="sw" value="1080" min="300" max="3000"></div><div><label>উচ্চতা (px)</label><input type="number" id="sh" value="1350" min="300" max="3000"></div></div></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0"><span class="st">৫</span>ডাউনলোড (Ultra HD) ও SEO</div>
+    <label style="margin-top:0">ডাউনলোড কোয়ালিটি</label>
+    <div class="seg" id="qs"><button data-q="ultra" class="on">Ultra HD</button><button data-q="fb">Facebook HD</button><button data-q="std">সাধারণ</button></div>
+    <p class="hint" id="qh"></p>
+    <div class="acts" style="margin-top:10px"><button class="btn" id="dl">⬇️ PNG</button><button class="btn" id="dl2">⬇️ JPG</button><button class="btn hot" id="shb" hidden>📤 শেয়ার</button></div>
+    <button class="btn" id="dlall" style="width:100%;margin-top:10px">📦 সব সাইজে একসাথে (Facebook, স্কয়ার, YouTube, স্টোরি)</button>
+    <p class="hint">চারটি JPG আলাদা আলাদা ফাইলে নামবে। ব্রাউজার একসাথে অনেক ফাইলের অনুমতি চাইলে "Allow" দিন।</p></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0"><span class="st">৬</span>SEO ও ফেসবুক ক্যাপশন</div>
+    <p class="hint" style="margin:0 0 6px">নিচের সব লেখা নিজে তৈরি হয়; বদলাতে পারেন। ডাউনলোড করা ছবির ভেতরেও এই তথ্য (Title, Description, Keywords) বসে যায়।</p>
+    <label>খবরের মূল লিংক</label><input id="aurl" placeholder="https://…" inputmode="url">
+    <label>ক্যাপশন + হ্যাশট্যাগ (ফেসবুক পোস্টে বসান)</label><textarea id="cap" style="min-height:130px"></textarea>
+    <div class="acts" style="margin-top:8px"><button class="btn" id="cpc">📋 ক্যাপশন কপি</button><button class="btn" id="cpa">📋 Alt text কপি</button></div>
+    <label>Alt text (ছবির বিবরণ)</label><textarea id="alt" style="min-height:60px"></textarea>
+    <label>ফাইলের নাম</label><input id="fn">
+    <label>কীওয়ার্ড (কমা দিয়ে)</label><input id="kw">
+    <div style="margin-top:10px"><button class="lnk" id="seoauto">↻ আবার অটো তৈরি করুন</button></div></div>
+</div>
+
+<div id="v-brand" class="side" hidden>
+  <div class="box glass"><div class="lbl" style="margin-top:0">আপনার নিউজ পেজের লোগো</div>
+    <div class="chrow"><label class="ico" id="lp" style="margin:0">➕<input type="file" id="logo" accept="image/*" hidden></label><div style="flex:1"><input id="ch" value="দেশ ওয়ান টিভি" placeholder="পেজের নাম (ঐচ্ছিক)"><div style="margin-top:6px"><button class="lnk" id="save">💾 সেভ রাখুন</button> <span id="msg2" style="font-size:12.5px;color:var(--mut)"></span></div></div></div>
+    <p class="hint">বাম পাশের আইকনে চাপ দিয়ে লোগো আপলোড করুন। লোগো কার্ডে নিজে বসবে; পেজের নাম শুধু লোগো না থাকলে দেখা যাবে।</p></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0">লোগো ও স্টিকার বসান</div>
+    <p class="hint" style="margin:0 0 10px">ক্যানভাসে লোগো বা স্টিকার আঙুল/মাউস দিয়ে টেনে যেকোনো জায়গায় বসান।</p>
+    <div class="chips" id="lay"></div>
+    <label>সাইজ (বড়-ছোট)</label><input type="range" id="lsz" min="20" max="300" value="100">
+    <div class="row"><div><label>ডানে-বামে</label><input type="range" id="lxx" min="0" max="100" value="50"></div><div><label>উপরে-নিচে</label><input type="range" id="lyy" min="0" max="100" value="12"></div></div>
+    <div class="row" id="lgo"><div><label>লোগোর জায়গা</label><select id="lpos"><option value="auto">অটো (টেমপ্লেটের মতো)</option><option value="tl">ওপরে বামে</option><option value="tc">ওপরে মাঝে</option><option value="tr">ওপরে ডানে</option><option value="free">যেকোনো জায়গা (টেনে বসান)</option></select></div>
+    <div><label>লোগোর আকৃতি</label><select id="lsty"><option value="plain">যেমন আছে</option><option value="circle">গোল (সাদা বৃত্ত)</option><option value="card">সাদা কার্ড</option></select></div></div>
+    <label>আরও লোগো / স্টিকার যোগ করুন</label><input type="file" id="stf" accept="image/*" multiple>
+    <div style="margin-top:10px"><button class="lnk" id="stdel">🗑️ এটি মুছুন</button></div></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0">কার্ডের তথ্য</div>
+    <label style="margin-top:0">তারিখ</label><input id="dt" placeholder="১৪ নভেম্বর ২০২৬">
+    <label>ওয়েবসাইট</label><input id="web" placeholder="www.example.com">
+    <label>সোশ্যাল হ্যান্ডেল</label><input id="handle" value="deshonetv" placeholder="banglavision">
+    <label>নিচে ডান পাশের লেখা</label><input id="more" value="বিস্তারিত কমেন্টে">
+    <label>ট্যাগ ব্যাজ</label><input id="tag" value="ব্রেকিং নিউজ">
+    <label class="chk"><input type="checkbox" id="ctag">ট্যাগ ব্যাজ দেখান</label>
+    <label class="chk"><input type="checkbox" id="csrc" checked>ওয়েবসাইট ফাঁকা থাকলে লিংকের সাইটের নাম দেখান</label></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0">নিচের বিজ্ঞাপনের জায়গা</div>
+    <select id="adm"><option value="none">নেই (জায়গা বাদ)</option><option value="ad">বিজ্ঞাপন দিন</option><option value="blank">খালি জায়গা রাখুন</option></select>
+    <label>বিজ্ঞাপনের ছবি</label><input type="file" id="adf" accept="image/*">
+    <label>খালি জায়গার উচ্চতা</label><input type="range" id="adh" min="6" max="25" value="14">
+    <div style="margin-top:10px"><button class="lnk" id="adc">🗑️ বিজ্ঞাপন মুছুন</button></div>
+    <p class="hint">বিজ্ঞাপনের ছবি দিলে নিচের পুরো চওড়া জায়গায় বসবে। বিজ্ঞাপন না থাকলে "নেই" রাখুন, অথবা পরে বসানোর জন্য "খালি জায়গা" রাখুন।</p></div>
+</div>
+
+<div id="v-design" class="side" hidden>
+  <div class="box glass"><div class="lbl" style="margin-top:0">রঙের থিম</div><div class="sws" id="pal"></div>
+    <div class="row3"><div><label>প্রাইমারি</label><input type="color" id="c1" value="#1d4fd8"></div><div><label>সেকেন্ডারি</label><input type="color" id="c2" value="#ffa31a"></div><div><label>ব্যাকগ্রাউন্ড</label><input type="color" id="bg" value="#2a0707"></div></div>
+    <div class="row"><div><label>লেখার রং</label><input type="color" id="tc" value="#ffffff"></div><div><label>হাইলাইট রং</label><input type="color" id="hc" value="#ffa31a"></div></div>
+    <div class="row"><div><label>তারিখ/ওয়েবসাইটের রং</label><input type="color" id="ic" value="#ffffff"></div><div><label>ট্যাগ ব্যাজের রং</label><input type="color" id="tgc" value="#ffa31a"></div></div></div>
+  <div class="box glass"><div class="lbl" style="margin-top:0">আমার সেভ করা রং</div>
+    <div class="row"><div><label style="margin-top:0">রং বেছে নিন</label><input type="color" id="mc" value="#ff0044"></div><div><label style="margin-top:0">কোথায় বসবে</label><select id="ct"><option value="tc">লেখার রং</option><option value="hc">হাইলাইট রং</option><option value="spc">নামের রং</option><option value="ic">তারিখ/ওয়েবসাইটের রং</option><option value="tgc">ট্যাগ ব্যাজের রং</option><option value="c1">প্রাইমারি</option><option value="c2">সেকেন্ডারি</option><option value="bg">ব্যাকগ্রাউন্ড</option></select></div></div>
+    <div class="sws" id="mysw" style="margin-top:10px"></div>
+    <button class="lnk" id="mca">➕ এই রং সেভ করুন</button> <button class="lnk" id="mcr">🗑️ সব মুছুন</button>
+    <p class="hint">সেভ করা রঙে চাপ দিলে ওপরের "কোথায় বসবে" জায়গায় বসবে।</p></div>
+  <div class="box glass"><label style="margin-top:0">ফন্ট</label><select id="fnt"><option>Noto Sans Bengali</option><option>Hind Siliguri</option><option>Noto Serif Bengali</option><option>Baloo Da 2</option><option>Tiro Bangla</option></select>
+    <label>লাইনের ফাঁক</label><input type="range" id="lh" min="100" max="180" value="130"><label>ছবির ওপর ছায়া</label><input type="range" id="dk" min="0" max="100" value="70"></div>
+  
+  <div class="box glass"><div class="lbl" style="margin-top:0">ছবি অ্যাডজাস্ট</div>
+    <label style="margin-top:0">ছবি/ভিডিওর জায়গা কতটা বড়</label><input type="range" id="pa" min="35" max="85" value="62"><p class="hint" style="margin:4px 0 0">(ডার্ক প্যানেল, ব্লু হেডার, লাইট ফেড ও টিভি নিউজে কাজ করে)</p>
+    </div>
+</div>
+
+<div id="v-reel" class="side" hidden>
+  <div class="box glass"><div class="lbl" style="margin-top:0">ভিডিওর সাইজ (কোন প্ল্যাটফর্মের জন্য)</div><div class="icons" id="rs"></div><p class="hint" style="margin:0 0 8px">৯:১৬ = Facebook/Instagram রিল, YouTube Shorts, TikTok · ১৬:৯ = YouTube · ৪:৫ ও ১:১ = ফিড পোস্ট। একাধিক ছবির কোলাজ থাকলে রিলেও কোলাজ থাকবে (ভিডিও ফাইল দিলে ভিডিও পুরো জায়গা নেবে)।</p><div class="row"><div><label style="margin-top:0">সময়</label><select id="dur"><option value="8">৮ সেকেন্ড</option><option value="12" selected>১২ সেকেন্ড</option><option value="20">২০ সেকেন্ড</option></select></div>
+    <div><label style="margin-top:0">মিউজিক</label><select id="mm"><option value="auto">অটো মিউজিক</option><option value="file">নিজের ফাইল</option><option value="none">নেই</option></select></div></div>
+    <input type="file" id="mus" accept="audio/*" hidden style="margin-top:8px">
+    <label>নিজের ভিডিও ফাইল (ঐচ্ছিক — দিলে এটাই ব্যাকগ্রাউন্ড হবে)</label><input type="file" id="vidf" accept="video/*">
+    <p class="hint">লিংক থেকে ভিডিও নামানো যায় না। লিংক দিলে তার ছবি দিয়ে অ্যানিমেটেড রিল হয়; আসল ভিডিও চাইলে ফাইলটি এখানে দিন। কোন সেকেন্ড থেকে কোন সেকেন্ড পর্যন্ত হবে তা "তৈরি" ট্যাবের ভিডিও বক্স থেকে ঠিক করুন।</p>
+    <button class="btn hot" id="mk" style="width:100%;margin-top:10px">🎬 রিল বানান</button><div class="bar" id="bar"><i id="bi"></i></div>
+    <video id="out" controls playsinline hidden></video><a id="vdl" class="btn" hidden style="display:block;margin-top:10px;text-decoration:none;text-align:center" download>⬇️ রিল ডাউনলোড</a></div>
+</div>
+</div>
+</main>
+<nav class="dock glass"><button class="app on" data-v="create"><span class="ico" style="--c1:#5aa2ff;--c2:#2b5cff">✨</span>তৈরি</button><button class="app" data-v="brand"><span class="ico" style="--c1:#5ee7a0;--c2:#12a05c">🏷️</span>ব্র্যান্ড</button><button class="app" data-v="design"><span class="ico" style="--c1:#ff9ad5;--c2:#a259ff">🎨</span>ডিজাইন</button><button class="app" data-v="reel"><span class="ico" style="--c1:#ff8a6b;--c2:#e11d48">🎬</span>রিল</button></nav><div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id),cv=$('cv'),enc=encodeURIComponent;let cx=cv.getContext('2d');
+let photos=[],pick=0,logo=null,fmt='1080x1350',tpl='A',busy=false,S={a:null,b:null,mix:0},F='"Noto Sans Bengali",sans-serif',vf=null,adImg=null,G={},PH={z:1,x:0,y:0},LG={x:.5,y:.12,s:100},ST=[],sel='logo',HIT=[],showSel=true,vs=0,ve=0,MC=[],META={url:'',site:'',desc:''},QS='ultra',AU={fn:1,alt:1,cap:1,kw:1};
+let LAYK='1',curSlot=0,SL=[],REG=[],rsz='1080x1920';
+const LAY={'1':{n:1,r:[[0,0,1,1]]},'2v':{n:2,r:[[0,0,.5,1],[.5,0,.5,1]]},'2h':{n:2,r:[[0,0,1,.5],[0,.5,1,.5]]},'3a':{n:3,r:[[0,0,.6,1],[.6,0,.4,.5],[.6,.5,.4,.5]]},'3b':{n:3,r:[[0,0,1,.58],[0,.58,.5,.42],[.5,.58,.5,.42]]},'3c':{n:3,r:[[0,0,1/3,1],[1/3,0,1/3,1],[2/3,0,1/3,1]]},'4':{n:4,r:[[0,0,.5,.5],[.5,0,.5,.5],[0,.5,.5,.5],[.5,.5,.5,.5]]}};
+const LAYN={'1':['১ ছবি','1 photo'],'2v':['২ পাশাপাশি','2 side by side'],'2h':['২ উপর-নিচে','2 stacked'],'3a':['৩ (বড়+২)','3 (1 big + 2)'],'3b':['৩ (উপরে বড়)','3 (big on top)'],'3c':['৩ সারি','3 columns'],'4':['৪ গ্রিড','4 grid']};
+const RS=[['1080x1920','🎞️','রিল ৯:১৬','#ff8fd0','#d6249f'],['1080x1350','📘','ফেসবুক ৪:৫','#5aa2ff','#1d4fd8'],['1080x1080','⬜','স্কয়ার ১:১','#ffd166','#f59e0b'],['1920x1080','▶️','YouTube ১৬:৯','#ff6b6b','#c4170c']];
+const slotP=i=>SL[i]||(SL[i]={im:null,z:1,x:0,y:-.5});
+function slotImgs(){const n=LAY[LAYK].n,o=[];for(let i=0;i<n;i++){const q=SL[i];o.push((q&&q.im)||(photos.length?photos[(pick+i)%photos.length]:null))}return o}
+function buildS(){const imgs=slotImgs();return{a:imgs[0]||null,b:null,mix:0,lay:LAYK,imgs,P:imgs.map((_,i)=>slotP(i))}}
+const msg=t=>$('msg').textContent=tr(t),V=id=>$(id).value,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+// ---------- i18n ----------
+const EN={"খবর বা ভিডিওর লিংক দিন — কার্ড আর রিল রেডি ✨":"Paste a news or video link — card & reel ready ✨","🔗 খবর / YouTube / Facebook লিংক":"🔗 News / YouTube / Facebook link","✨ বানান":"✨ Create","নমুনা দিয়ে দেখুন":"Try a sample","YouTube, Facebook বা যেকোনো খবর/ভিডিও লিংক দিন। লিংক না চললে নিচে ভিডিও ফাইল দিন।":"Paste a YouTube, Facebook or any news/video link. If a link does not work, add a video file below.",
+"ছবি / ভিডিও":"Photo / video","নিজের ছবি যোগ করুন (ঐচ্ছিক)":"Add your own photos (optional)","ভিডিও ফাইল (ঐচ্ছিক) — ভিডিও থেকে কার্ডের ছবি আর রিল দুটোই হবে":"Video file (optional) — gives card photos and the reel","ওপরের বক্সে লিংক দিলে ছবি ও শিরোনাম নিজেই আসবে। নিচের ছোট ছবিতে চাপ দিয়ে পছন্দের ছবি বেছে নিন।":"A link in the top box fetches photo and headline. Tap a small photo below to choose it.",
+"শিরোনাম ও লেখা":"Headline & text","নতুন লাইনের জন্য Enter চাপুন। কোনো শব্দে আলাদা রং দিতে সেটি *এভাবে* তারা চিহ্নের ভেতরে লিখুন।":"Press Enter for a new line. To colour a word, wrap it in stars like *this*.","লেখার সাইজ":"Text size","লেখার অ্যালাইনমেন্ট":"Text alignment","বামে":"Left","মাঝে":"Center","ডানে":"Right","লেখা উপরে-নিচে সরান":"Move text up / down","শেষ লাইনে আলাদা রং":"Highlight last lines","নেই":"None","শেষ ১ লাইন":"Last 1 line","শেষ ২ লাইন":"Last 2 lines",
+"টেমপ্লেট বেছে নিন":"Choose a template","সাইজ":"Size","চওড়া (px)":"Width (px)","উচ্চতা (px)":"Height (px)",
+"ডার্ক প্যানেল":"Dark panel","ব্লু হেডার":"Blue header","লাইট ফেড":"Light fade","টিভি নিউজ":"TV News","ব্রেকিং":"Breaking","গ্লাস":"Glass","ফোকাস":"Focus","পোস্ট":"Post","স্কয়ার":"Square","ল্যান্ডস্কেপ":"Landscape","স্টোরি":"Story","নিজের":"Custom",
+"আপনার নিউজ পেজের লোগো":"Your news page logo","পেজের নাম (ঐচ্ছিক)":"Page name (optional)","💾 সেভ রাখুন":"💾 Save","বাম পাশের আইকনে চাপ দিয়ে লোগো আপলোড করুন। লোগো কার্ডে নিজে বসবে; পেজের নাম শুধু লোগো না থাকলে দেখা যাবে।":"Tap the icon on the left to upload your logo. It is placed on the card automatically; the page name shows only when there is no logo.",
+"কার্ডের তথ্য":"Card info","তারিখ":"Date","ওয়েবসাইট":"Website","সোশ্যাল হ্যান্ডেল":"Social handle","নিচে ডান পাশের লেখা":"Bottom-right text","ট্যাগ ব্যাজ":"Tag badge","ট্যাগ ব্যাজ দেখান":"Show tag badge","ওয়েবসাইট ফাঁকা থাকলে লিংকের সাইটের নাম দেখান":"If website is empty, show the link's site name",
+"নিচের বিজ্ঞাপনের জায়গা":"Bottom ad space","নেই (জায়গা বাদ)":"None (no space)","বিজ্ঞাপন দিন":"Add an ad","খালি জায়গা রাখুন":"Keep blank space","বিজ্ঞাপনের ছবি":"Ad image","খালি জায়গার উচ্চতা":"Blank space height","🗑️ বিজ্ঞাপন মুছুন":"🗑️ Remove ad","বিজ্ঞাপনের ছবি দিলে নিচের পুরো চওড়া জায়গায় বসবে। বিজ্ঞাপন না থাকলে \"নেই\" রাখুন, অথবা পরে বসানোর জন্য \"খালি জায়গা\" রাখুন।":"An ad image fills the full width at the bottom. With no ad, keep \"None\", or choose \"blank space\" to add one later.",
+"রঙের থিম":"Colour theme","প্রাইমারি":"Primary","সেকেন্ডারি":"Secondary","ব্যাকগ্রাউন্ড":"Background","লেখার রং":"Text colour","হাইলাইট রং":"Highlight colour","ফন্ট":"Font","লাইনের ফাঁক":"Line spacing","ছবির ওপর ছায়া":"Photo shade","লোগো":"Logo","লোগোর জায়গা":"Logo position","অটো (টেমপ্লেটের মতো)":"Auto (as template)","ওপরে বামে":"Top left","ওপরে মাঝে":"Top center","ওপরে ডানে":"Top right","লোগোর আকৃতি":"Logo style","যেমন আছে":"As is","গোল (সাদা বৃত্ত)":"Round (white circle)","সাদা কার্ড":"White card","লোগোর সাইজ":"Logo size","ছবি অ্যাডজাস্ট":"Adjust photo","ছবি জুম":"Photo zoom","ছবি ডানে-বামে":"Photo left / right","ছবি উপরে-নিচে":"Photo up / down","↺ রিসেট":"↺ Reset",
+"সময়":"Duration","৮ সেকেন্ড":"8 seconds","১২ সেকেন্ড":"12 seconds","২০ সেকেন্ড":"20 seconds","মিউজিক":"Music","অটো মিউজিক":"Auto music","নিজের ফাইল":"My own file","নিজের ভিডিও ফাইল (ঐচ্ছিক — দিলে এটাই ব্যাকগ্রাউন্ড হবে)":"Your own video file (optional — used as the background)","লিংক থেকে ভিডিও নামানো যায় না। লিংক দিলে তার ছবি দিয়ে অ্যানিমেটেড রিল হয়; আসল ভিডিও চাইলে ফাইলটি এখানে দিন।":"Videos can't be downloaded from most links. A link gives an animated reel from its images; for real video, add the file here.","🎬 রিল বানান":"🎬 Make reel","⬇️ রিল ডাউনলোড":"⬇️ Download reel",
+"তৈরি":"Create","ব্র্যান্ড":"Brand","ডিজাইন":"Design","রিল":"Reel","১৪ নভেম্বর ২০২৬":"14 November 2026","বক্তার নাম / উপশিরোনাম (আলাদা লাইনে বসবে)":"Speaker name / sub-line (own line)","যেমন: স্পিকার অমুক":"e.g. Speaker Name","নামের সাইজ":"Name size","নামের রং":"Name colour","লেখা ডানে-বামে সরান":"Move text left / right","উদ্ধৃতি চিহ্ন (“) দেখান":"Show quote mark (“)","📸 এই সেকেন্ডের ছবি কার্ডে নিন":"📸 Use this moment as card photo","▶ রিল এখান থেকে শুরু":"▶ Reel starts here","⏹ এখানে শেষ":"⏹ Ends here","✋ লোগো বা স্টিকার ছবির ওপর টেনে সরান":"✋ Drag the logo or stickers on the preview","লোগো ও স্টিকার বসান":"Place logo & stickers","ক্যানভাসে লোগো বা স্টিকার আঙুল/মাউস দিয়ে টেনে যেকোনো জায়গায় বসান।":"Drag the logo or stickers on the preview with finger/mouse to place them anywhere.","সাইজ (বড়-ছোট)":"Size (bigger / smaller)","ডানে-বামে":"Left / right","উপরে-নিচে":"Up / down","যেকোনো জায়গা (টেনে বসান)":"Anywhere (drag)","আরও লোগো / স্টিকার যোগ করুন":"Add more logos / stickers","🗑️ এটি মুছুন":"🗑️ Remove this","তারিখ/ওয়েবসাইটের রং":"Date / website colour","ট্যাগ ব্যাজের রং":"Tag badge colour","আমার সেভ করা রং":"My saved colours","রং বেছে নিন":"Pick a colour","কোথায় বসবে":"Apply to","➕ এই রং সেভ করুন":"➕ Save this colour","🗑️ সব মুছুন":"🗑️ Clear all","সেভ করা রঙে চাপ দিলে ওপরের \"কোথায় বসবে\" জায়গায় বসবে।":"Tap a saved colour to apply it to the chosen target.","ছবি/ভিডিওর জায়গা কতটা বড়":"Photo / video area size","(ডার্ক প্যানেল, ব্লু হেডার, লাইট ফেড ও টিভি নিউজে কাজ করে)":"(works on Dark panel, Blue header, Light fade and TV News)","লিংক থেকে ভিডিও নামানো যায় না। লিংক দিলে তার ছবি দিয়ে অ্যানিমেটেড রিল হয়; আসল ভিডিও চাইলে ফাইলটি এখানে দিন। কোন সেকেন্ড থেকে কোন সেকেন্ড পর্যন্ত হবে তা \"তৈরি\" ট্যাবের ভিডিও বক্স থেকে ঠিক করুন।":"Videos can't be downloaded from most links. A link gives an animated reel from its images; for real video, add the file here. Set start/end seconds in the video box of the Create tab.","✅ ছবিটি কার্ডে নেওয়া হয়েছে":"✅ Photo added to the card","ডাউনলোড (Ultra HD) ও SEO":"Download (Ultra HD) & SEO","ডাউনলোড কোয়ালিটি":"Download quality","সাধারণ":"Standard","📤 শেয়ার":"📤 Share","SEO ও ফেসবুক ক্যাপশন":"SEO & Facebook caption","নিচের সব লেখা নিজে তৈরি হয়; বদলাতে পারেন। ডাউনলোড করা ছবির ভেতরেও এই তথ্য (Title, Description, Keywords) বসে যায়।":"All text below is generated automatically and can be edited. The same info (Title, Description, Keywords) is also embedded inside the downloaded image.","খবরের মূল লিংক":"Original news link","ক্যাপশন + হ্যাশট্যাগ (ফেসবুক পোস্টে বসান)":"Caption + hashtags (paste into the Facebook post)","📋 ক্যাপশন কপি":"📋 Copy caption","📋 Alt text কপি":"📋 Copy alt text","Alt text (ছবির বিবরণ)":"Alt text (image description)","ফাইলের নাম":"File name","কীওয়ার্ড (কমা দিয়ে)":"Keywords (comma separated)","↻ আবার অটো তৈরি করুন":"↻ Regenerate automatically",
+"ছবির সাজানো — একটি কার্ডে ১ থেকে ৪ ছবি":"Photo layout — 1 to 4 photos in one card","ছবির পুল (ছোট ছবিতে চাপ দিলে নির্বাচিত ঘরে বসবে)":"Photos (tap one to put it in the selected slot)","নির্বাচিত ছবির জুম":"Zoom of selected photo","💡 প্রিভিউতে ছবির ওপর আঙুল/মাউস টেনেও ছবি সরানো যায়। একসাথে অনেক ছবি আপলোড করলে নিজে থেকে কোলাজ হয়ে যাবে।":"💡 You can also drag a photo on the preview to move it. Uploading several photos at once makes a collage automatically.","৪:৫ = Facebook/Instagram পোস্ট (সেরা) · ১:১ = স্কয়ার · ১৬:৯ = YouTube · ৯:১৬ = স্টোরি/রিল · Facebook লিংক = লিংক শেয়ারের ছবি":"4:5 = Facebook/Instagram post (best) · 1:1 = square · 16:9 = YouTube · 9:16 = story/reel · Facebook link = link-share image","📦 সব সাইজে একসাথে (Facebook, স্কয়ার, YouTube, স্টোরি)":"📦 All sizes at once (Facebook, Square, YouTube, Story)","চারটি JPG আলাদা আলাদা ফাইলে নামবে। ব্রাউজার একসাথে অনেক ফাইলের অনুমতি চাইলে \"Allow\" দিন।":"Four JPG files will download separately. If the browser asks to allow multiple downloads, choose \"Allow\".","ভিডিওর সাইজ (কোন প্ল্যাটফর্মের জন্য)":"Video size (for which platform)","৯:১৬ = Facebook/Instagram রিল, YouTube Shorts, TikTok · ১৬:৯ = YouTube · ৪:৫ ও ১:১ = ফিড পোস্ট। একাধিক ছবির কোলাজ থাকলে রিলেও কোলাজ থাকবে (ভিডিও ফাইল দিলে ভিডিও পুরো জায়গা নেবে)।":"9:16 = Facebook/Instagram Reels, YouTube Shorts, TikTok · 16:9 = YouTube · 4:5 and 1:1 = feed posts. A photo collage stays in the reel (a video file fills the whole area).","ফেসবুক পোস্ট ৪:৫":"Facebook post 4:5","স্কয়ার ১:১":"Square 1:1","YouTube ১৬:৯":"YouTube 16:9","স্টোরি/রিল ৯:১৬":"Story / Reel 9:16","ফেসবুক লিংক":"Facebook link","রিল ৯:১৬":"Reel 9:16","ফেসবুক ৪:৫":"Facebook 4:5",
+"banglavision":"banglavision",
+"আগে একটি সঠিক লিংক দিন":"Please paste a valid link first","লিংক থেকে খবর আনা হচ্ছে…":"Fetching from the link…","লিংক থেকে কিছু আনা যায়নি (সাইট আটকে দিতে পারে)। ভিডিও ফাইল বা নিজের ছবি দিন, আর শিরোনাম হাতে লিখুন।":"Nothing could be fetched from this link (the site may block it). Add a video file or your own photo, and type the headline.","ডেমো নমুনা — আসল খবরের জন্য লিংক দিন":"Demo sample — paste a link for real news","✅ ভিডিও যোগ হয়েছে — \"রিল বানান\" চাপুন":"✅ Video added — tap \"Make reel\"","✅ সেভ হয়েছে":"✅ Saved","সেভ হয়নি":"Could not save","ছবি এক্সপোর্ট হয়নি (অন্য সাইটের ছবি আটকেছে) — অন্য ছবি বা নিজের ছবি বেছে নিন":"Export failed (the image is blocked by its site) — pick another or your own photo","এই ব্রাউজারে রিল রেকর্ডিং নেই — Chrome ব্যবহার করুন":"This browser can't record reels — use Chrome","রিল তৈরি হচ্ছে… ট্যাব খোলা রাখুন":"Making the reel… keep this tab open","✅ রিল তৈরি হয়েছে":"✅ Reel is ready","ভিডিও থেকে ছবি নেওয়া হচ্ছে…":"Grabbing photos from the video…","✅ ভিডিও থেকে ছবি নেওয়া হয়েছে — পছন্দেরটি বেছে নিন; রিলেও এই ভিডিও ব্যবহার হবে":"✅ Photos taken from the video — pick one; the reel will use this video too","ভিডিও নামানো হচ্ছে…":"Downloading the video…","ভিডিও লিংক থেকে নামানো যায়নি (সাইট আটকে দিয়েছে) — ভিডিও ফাইলটি নিচে দিন":"Could not download the video from this link (blocked by the site) — add the video file below"};
+let lang='bn';try{lang=localStorage.getItem('nm_lang')||'bn'}catch(e){}
+const tr=x=>lang==='en'&&EN[x]?EN[x]:x,T=(b,e)=>lang==='en'?e:b,orig=new WeakMap();
+const DEF={hl:[['এখানে আপনার খবরের\nশিরোনাম বসবে','Your news\nheadline goes here']],tag:[['ব্রেকিং নিউজ','Breaking News']],more:[['বিস্তারিত কমেন্টে','Details in comments']]};
+let dtAuto=true;const setDate=()=>{if(dtAuto)$('dt').value=new Date().toLocaleDateString(lang==='en'?'en-GB':'bn-BD',{day:'numeric',month:'long',year:'numeric'}).replace(',','')};
+$('dt').addEventListener('input',()=>dtAuto=false);
+function applyLang(){document.documentElement.lang=lang;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest('script,style,textarea')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}),ns=[];while(w.nextNode())ns.push(w.currentNode);
+  ns.forEach(n=>{if(!orig.has(n)){if(!n.nodeValue.trim())return;orig.set(n,n.nodeValue)}const o=orig.get(n),k=o.trim();n.nodeValue=lang==='en'&&EN[k]?o.replace(k,EN[k]):o});
+  document.querySelectorAll('[placeholder]').forEach(e=>{if(e._p===undefined)e._p=e.placeholder;e.placeholder=tr(e._p)});
+  Object.keys(DEF).forEach(k=>DEF[k].forEach(pr=>{if(V(k)===pr[0]||V(k)===pr[1])$(k).value=pr[lang==='en'?1:0]}));
+  setDate();$('lbn').classList.toggle('on',lang==='bn');$('len').classList.toggle('on',lang==='en');$('msg').textContent='';drawIcons();buildChips();buildLays();buildSlots();render()}
+[['lbn','bn'],['len','en']].forEach(([id,l])=>$(id).onclick=()=>{lang=l;try{localStorage.setItem('nm_lang',l)}catch(e){}applyLang()});
+// ---------- templates & formats ----------
+const TP=[['A','🟥','ডার্ক প্যানেল','#ff7a59','#7a0d0d'],['B','🟦','ব্লু হেডার','#5aa2ff','#1d4fd8'],['C','⬜','লাইট ফেড','#ffffff','#e8321e'],['D','📺','টিভি নিউজ','#ff6b7a','#b30f1f'],['E','📰','ব্রেকিং','#ff6b7a','#e11d2e'],['F','🪟','গ্লাস','#7ee8fa','#4a6cf7'],['G','💬','ফোকাস','#f093fb','#f5576c']];
+const PRE={A:{c1:'#1d4fd8',c2:'#ffa31a',bg:'#2a0707',tc:'#ffffff',hc:'#ffa31a',spc:'#ffd66b',ic:'#ffffff',tgc:'#ffa31a',al:'center',hn:1,tg:0,pa:62},
+B:{c1:'#1d4fd8',c2:'#ffc107',bg:'#0a2a94',tc:'#ffffff',hc:'#ffc107',spc:'#ffe08a',ic:'#ffffff',tgc:'#ffc107',al:'center',hn:0,tg:0,pa:70},
+C:{c1:'#e8321e',c2:'#e8321e',bg:'#f1f1f1',tc:'#111111',hc:'#e8321e',spc:'#555555',ic:'#333333',tgc:'#e8321e',al:'center',hn:1,tg:0,pa:50},
+D:{c1:'#b30f1f',c2:'#ffc107',bg:'#0b2a5c',tc:'#ffffff',hc:'#ffffff',spc:'#ffe08a',ic:'#ffffff',tgc:'#ffc107',al:'left',hn:0,tg:1,pa:60},
+E:{c1:'#e11d2e',c2:'#ffc107',bg:'#0b1b3a',tc:'#ffffff',hc:'#ffc107',spc:'#ffe08a',ic:'#ffffff',tgc:'#ffc107',al:'left',hn:0,tg:1,pa:60},
+F:{c1:'#4a6cf7',c2:'#7ee8fa',bg:'#0b1b3a',tc:'#ffffff',hc:'#7ee8fa',spc:'#ffffff',ic:'#ffffff',tgc:'#7ee8fa',al:'left',hn:0,tg:1,pa:60},
+G:{c1:'#f5576c',c2:'#f093fb',bg:'#0b1b3a',tc:'#ffffff',hc:'#f093fb',spc:'#ffffff',ic:'#ffffff',tgc:'#f093fb',al:'left',hn:0,tg:1,pa:60}};
+const DEFLP={A:'tl',B:'tl',C:'mid',D:'tab',E:'tl',F:'tl',G:'tl'};
+const FM=[['1080x1350','📱','ফেসবুক পোস্ট ৪:৫','#5ee7a0','#12a05c'],['1080x1080','⬜','স্কয়ার ১:১','#ffd166','#f59e0b'],['1920x1080','▶️','YouTube ১৬:৯','#ff6b6b','#c4170c'],['1080x1920','🎞️','স্টোরি/রিল ৯:১৬','#ff8fd0','#d6249f'],['1200x630','🔗','ফেসবুক লিংক','#5ad1ff','#0e8bd6'],['custom','✏️','নিজের','#c4b5fd','#6d28d9']];
+function setAl(v){$('al').value=v;document.querySelectorAll('#alg button').forEach(b=>b.classList.toggle('on',b.dataset.al===v))}
+document.querySelectorAll('#alg button').forEach(b=>b.onclick=()=>{setAl(b.dataset.al);render()});
+function applyPre(id){const p=PRE[id];['c1','c2','bg','tc','hc','spc','ic','tgc','pa'].forEach(k=>$(k).value=p[k]);setAl(p.al);$('hn').value=p.hn;$('ctag').checked=!!p.tg;$('ly').value=0;$('lxo').value=0}
+function icons(el,list,on,set){el.innerHTML='';list.forEach(x=>{const b=document.createElement('button');b.className='app'+(on===x[0]?' on':'');b.innerHTML=`<span class="ico" style="--c1:${x[3]};--c2:${x[4]}">${x[1]}</span>${tr(x[2])}`;b.onclick=()=>{set(x);drawIcons();render()};el.appendChild(b)})}
+function drawIcons(){icons($('tp'),TP,tpl,x=>{tpl=x[0];applyPre(x[0])});icons($('fm'),FM,fmt,x=>fmt=x[0]);icons($('rs'),RS,rsz,x=>rsz=x[0]);$('cs').hidden=fmt!=='custom'}
+const PAL=[['#b30f1f','#ffc107'],['#1d6bff','#e11d2e'],['#0f9d58','#f9a825'],['#c8102e','#111827'],['#ff6a00','#1b1b3a'],['#6a3df0','#ff3d9a'],['#0aa6a6','#ff5e5b'],['#b8860b','#0b1b3a'],['#e91e63','#3f51b5']];
+PAL.forEach(p=>{const b=document.createElement('button');b.className='sw';b.style.background=`linear-gradient(135deg,${p[0]} 50%,${p[1]} 50%)`;b.onclick=()=>{$('c1').value=p[0];$('c2').value=p[1];$('hc').value=p[1];render()};$('pal').appendChild(b)});
+const VIEWS=['create','brand','design','reel'];
+document.querySelectorAll('.dock .app').forEach(b=>b.onclick=()=>{document.querySelectorAll('.dock .app').forEach(x=>x.classList.toggle('on',x===b));VIEWS.forEach(v=>$('v-'+v).hidden=v!==b.dataset.v)});
+// ---------- brand ----------
+const BK=['ch','handle','web','more','tag'];
+try{const s=JSON.parse(localStorage.getItem('nm_brand2')||'{}');BK.forEach(k=>{if(s[k]!==undefined)$(k).value=s[k]});if(s.lg)LG=s.lg;if(s.lpos)$('lpos').value=s.lpos;if(s.logo)setLogo(s.logo)}catch(e){}
+function setLogo(d){const im=new Image();im.onload=()=>{logo=im;$('lp').style.backgroundImage=`url(${d})`;$('lp').firstChild.textContent='';buildChips();syncSel();render()};im.src=d}
+$('save').onclick=e=>{try{const s={};BK.forEach(k=>s[k]=V(k));s.lg=LG;s.lpos=V('lpos');if(logo&&logo.src.startsWith('data:'))s.logo=logo.src;localStorage.setItem('nm_brand2',JSON.stringify(s));$('msg2').textContent=tr('✅ সেভ হয়েছে')}catch(er){$('msg2').textContent=tr('সেভ হয়নি')}};
+const rd=(f,cb)=>{const r=new FileReader();r.onload=()=>cb(r.result);r.readAsDataURL(f)};
+$('logo').onchange=e=>{const f=e.target.files[0];if(f)rd(f,setLogo)};
+$('mm').onchange=()=>$('mus').hidden=V('mm')!=='file';
+$('media').onchange=async e=>{const fs=[...e.target.files];if(!fs.length)return;const ims=(await Promise.all(fs.map(f=>new Promise(ok=>rd(f,d=>{const im=new Image();im.onload=()=>ok(im);im.onerror=()=>ok(null);im.src=d}))))).filter(x=>x&&x.naturalWidth>=200);if(!ims.length)return;
+  photos=[...ims,...photos];pick=0;const k=Math.min(4,ims.length);if(k>1&&LAY[LAYK].n<k)LAYK=k===2?'2v':k===3?'3a':'4';
+  SL=[];ims.slice(0,LAY[LAYK].n).forEach((im,i)=>{slotP(i).im=im});curSlot=0;buildLays();buildSlots();syncSlot();thumbs();render();e.target.value=''};
+$('adf').onchange=e=>{const f=e.target.files[0];if(f)rd(f,d=>{const im=new Image();im.onload=()=>{adImg=im;$('adm').value='ad';render()};im.src=d})};
+$('adc').onclick=()=>{adImg=null;$('adf').value='';$('adm').value='none';render()};
+// layers (logo + stickers): drag, size, position
+const target=()=>sel==='logo'?LG:(ST[sel]||LG);
+function buildChips(){const c=$('lay');c.innerHTML='';const add=(id,txt)=>{const b=document.createElement('button');b.textContent=txt;b.className=sel===id?'on':'';b.onclick=()=>{sel=id;syncSel();buildChips();render()};c.appendChild(b)};add('logo','🏷️ '+tr('লোগো'));ST.forEach((q,i)=>add(i,'🖼️ '+(i+1)))}
+function syncSel(){const t=target();$('lsz').value=t.s;$('lxx').value=Math.round(t.x*100);$('lyy').value=Math.round(t.y*100);$('lgo').hidden=sel!=='logo'}
+['lsz','lxx','lyy'].forEach(id=>$(id).addEventListener('input',()=>{const t=target();t.s=+$('lsz').value;if(id!=='lsz'){t.x=$('lxx').value/100;t.y=$('lyy').value/100;if(sel==='logo')$('lpos').value='free'}render()}));
+$('stf').onchange=e=>[...e.target.files].forEach(f=>rd(f,d=>{const im=new Image();im.onload=()=>{ST.push({im,x:.82,y:Math.min(.9,.15+.12*ST.length),s:100});sel=ST.length-1;buildChips();syncSel();render()};im.src=d}));
+$('stdel').onclick=()=>{if(sel==='logo'){logo=null;$('lp').style.backgroundImage='';$('lp').firstChild.textContent='➕'}else{ST.splice(sel,1);sel='logo'}buildChips();syncSel();render()};
+let drag=null,pan=null;const cpt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+cv.addEventListener('pointerdown',e=>{if(busy)return;const[px,py]=cpt(e);
+  for(let i=HIT.length-1;i>=0;i--){const h=HIT[i];if(px>=h.x&&px<=h.x+h.w&&py>=h.y&&py<=h.y+h.h){sel=h.id;const t=target();t.x=(h.x+h.w/2)/cv.width;t.y=(h.y+h.h/2)/cv.height;drag={dx:px-t.x*cv.width,dy:py-t.y*cv.height};try{cv.setPointerCapture(e.pointerId)}catch(er){}if(sel==='logo')$('lpos').value='free';syncSel();buildChips();render();e.preventDefault();return}}
+  for(let i=REG.length-1;i>=0;i--){const r=REG[i];if(px>=r.x&&px<=r.x+r.w&&py>=r.y&&py<=r.y+r.h){curSlot=r.i;const q=slotP(r.i);pan={px,py,x:q.x,y:q.y,r};try{cv.setPointerCapture(e.pointerId)}catch(er){}buildSlots();syncSlot();thumbs();render();e.preventDefault();return}}});
+cv.addEventListener('pointermove',e=>{const[px,py]=cpt(e);
+  if(drag){const t=target();t.x=clamp((px-drag.dx)/cv.width,0,1);t.y=clamp((py-drag.dy)/cv.height,0,1);syncSel();render()}
+  else if(pan){const q=slotP(pan.r.i),r=pan.r;if(r.ovx>1)q.x=clamp(pan.x-(px-pan.px)/r.ovx,-1,1);if(r.ovy>1)q.y=clamp(pan.y-(py-pan.py)/r.ovy,-1,1);syncSlot();render()}});
+const endDrag=()=>{drag=null;pan=null};cv.addEventListener('pointerup',endDrag);cv.addEventListener('pointercancel',endDrag);
+// layout / slot UI
+function layIcon(r){return '<svg width="40" height="40" viewBox="0 0 40 40">'+r.map(f=>`<rect x="${(1+f[0]*38+1).toFixed(1)}" y="${(1+f[1]*38+1).toFixed(1)}" width="${(f[2]*38-2).toFixed(1)}" height="${(f[3]*38-2).toFixed(1)}" rx="3" fill="currentColor"/>`).join('')+'</svg>'}
+function buildLays(){const c=$('lays');c.innerHTML='';Object.keys(LAY).forEach(k=>{const b=document.createElement('button');b.className=k===LAYK?'on':'';b.innerHTML=layIcon(LAY[k].r)+'<span>'+T(LAYN[k][0],LAYN[k][1])+'</span>';b.onclick=()=>{LAYK=k;curSlot=0;buildLays();buildSlots();syncSlot();thumbs();render()};c.appendChild(b)})}
+function buildSlots(){const c=$('slots'),n=LAY[LAYK].n;c.innerHTML='';c.hidden=n<2;for(let i=0;i<n;i++){const b=document.createElement('button');b.textContent=T('ঘর ','Slot ')+(i+1);b.className=i===curSlot?'on':'';b.onclick=()=>{curSlot=i;buildSlots();syncSlot();thumbs();render()};c.appendChild(b)}}
+function syncSlot(){const q=slotP(curSlot);$('pz').value=Math.round(q.z*100);$('pxo').value=Math.round(q.x*100);$('pyo').value=Math.round(q.y*100);document.querySelectorAll('#slots button').forEach((b,i)=>b.classList.toggle('on',i===curSlot))}
+['pz','pxo','pyo'].forEach(id=>$(id).addEventListener('input',()=>{const q=slotP(curSlot);q.z=$('pz').value/100;q.x=$('pxo').value/100;q.y=$('pyo').value/100;render()}));
+$('pr').onclick=()=>{const q=slotP(curSlot);q.z=1;q.x=0;q.y=-.5;syncSlot();render()};
+// video panel
+$('vcap').onclick=()=>{const v=$('pv');if(!v.videoWidth)return;const k=Math.min(1,1280/v.videoWidth),c=document.createElement('canvas');c.width=Math.round(v.videoWidth*k);c.height=Math.round(v.videoHeight*k);c.getContext('2d').drawImage(v,0,0,c.width,c.height);addPhoto(c.toDataURL('image/jpeg',.92),true);msg('✅ ছবিটি কার্ডে নেওয়া হয়েছে')};
+const vinfo=()=>$('vinfo').textContent=T('শুরু: ','Start: ')+vs.toFixed(1)+T(' সেকেন্ড · শেষ: ',' s · End: ')+(ve>vs?ve.toFixed(1)+T(' সেকেন্ড',' s'):T('ভিডিওর শেষ','end of video'));
+$('vst').onclick=()=>{vs=$('pv').currentTime;if(ve<=vs)ve=0;vinfo()};$('ven').onclick=()=>{const t=$('pv').currentTime;if(t>vs){ve=t;vinfo()}};
+// my colours
+try{MC=JSON.parse(localStorage.getItem('nm_colors')||'[]')}catch(e){}
+function buildMy(){const w=$('mysw');w.innerHTML='';MC.forEach(c=>{const b=document.createElement('button');b.className='sw';b.style.background=c;b.onclick=()=>{$(V('ct')).value=c;$('mc').value=c;render()};w.appendChild(b)})}
+$('mc').addEventListener('input',()=>{$(V('ct')).value=V('mc');render()});
+$('ct').addEventListener('change',()=>{$('mc').value=$(V('ct')).value});
+$('mca').onclick=()=>{const c=V('mc');if(!MC.includes(c)){MC.push(c);try{localStorage.setItem('nm_colors',JSON.stringify(MC))}catch(e){}buildMy()}};
+$('mcr').onclick=()=>{MC=[];try{localStorage.removeItem('nm_colors')}catch(e){}buildMy()};
+buildMy();
+$('vidf').onchange=$('vidc').onchange=e=>useVideo(e.target.files[0]);
+document.querySelectorAll('input,select,textarea').forEach(el=>{if(el.type!=='file'&&el.type!=='hidden'&&el.id!=='src'&&!['lsz','lxx','lyy','mc','fn','alt','cap','kw','aurl','pz','pxo','pyo'].includes(el.id))el.addEventListener('input',()=>{if(el.id==='fnt')loadFont().then(render);else render()})});
+function loadFont(){return document.fonts.load(`800 40px "${V('fnt')}"`).catch(()=>{})}
+// ---------- photos & video ----------
+function addPhoto(u,front){const im=new Image();if(/^http/.test(u))im.crossOrigin='anonymous';im.onload=()=>{if(im.naturalWidth<400)return;front?photos.unshift(im):photos.push(im);if(front){slotP(curSlot).im=im;pick=curSlot===0?0:pick+1}thumbs();render()};im.src=u}
+function thumbs(){const cur=slotImgs(),n=LAY[LAYK].n;['th','th2'].forEach(id=>{const t=$(id);if(!t)return;t.innerHTML='';photos.forEach((im,i)=>{const e=document.createElement('img'),si=cur.indexOf(im);e.src=im.src;e.title=im.naturalWidth+'×'+im.naturalHeight;e.className=si===curSlot?'on':(si>=0&&si<n?'use':'');e.onclick=()=>{slotP(curSlot).im=im;if(curSlot===0)pick=i;syncSlot();thumbs();render()};t.appendChild(e)})})}
+async function frames(src,n=6){const v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';if(/^http/.test(src))v.crossOrigin='anonymous';v.src=src;
+  await new Promise((ok,no)=>{v.onloadedmetadata=ok;v.onerror=()=>no(new Error('v'));setTimeout(()=>no(new Error('v')),15000)});
+  const d=v.duration;if(!isFinite(d)||!v.videoWidth)throw new Error('v');const k=Math.min(1,1280/v.videoWidth),c=document.createElement('canvas');c.width=Math.round(v.videoWidth*k);c.height=Math.round(v.videoHeight*k);const g=c.getContext('2d'),out=[];
+  for(let i=0;i<n;i++){v.currentTime=Math.max(0,Math.min(d-.1,d*(i+.5)/n));await new Promise(r=>{v.onseeked=r;setTimeout(r,3000)});g.drawImage(v,0,0,c.width,c.height);out.push(c.toDataURL('image/jpeg',.9))}
+  return out}
+async function useVideo(f,keep){if(!f)return;vf=f;vs=0;ve=0;const url=URL.createObjectURL(f);$('vp').hidden=false;$('pv').src=url;vinfo();msg('ভিডিও থেকে ছবি নেওয়া হচ্ছে…');
+  try{const fr=await frames(url);if(!keep){photos=[];pick=0;SL=[];curSlot=0;thumbs()}fr.forEach(d=>addPhoto(d,false));msg('✅ ভিডিও থেকে ছবি নেওয়া হয়েছে — পছন্দেরটি বেছে নিন; রিলেও এই ভিডিও ব্যবহার হবে')}
+  catch(e){msg('✅ ভিডিও যোগ হয়েছে — "রিল বানান" চাপুন')}}
+function sample(){photos=[];pick=0;SL=[];curSlot=0;['#1d6bff,#19d3c5','#ff3d6e,#ffb347','#7b5cff,#2ad4ff'].forEach((p,i)=>{const c=document.createElement('canvas');c.width=1200;c.height=1600;const x=c.getContext('2d'),[a,b]=p.split(','),g=x.createLinearGradient(0,0,1200,1600);g.addColorStop(0,a);g.addColorStop(1,b);x.fillStyle=g;x.fillRect(0,0,1200,1600);for(let k=0;k<9;k++){x.fillStyle=`rgba(255,255,255,${.05+.04*(k%3)})`;x.beginPath();x.arc((k*397+i*211)%1200,(k*521+i*307)%1600,120+k*30,0,7);x.fill()}addPhoto(c.toDataURL())});$('hl').value=DEF.hl[0][lang==='en'?1:0];msg('ডেমো নমুনা — আসল খবরের জন্য লিংক দিন');render()}
+$('demo').onclick=sample;
+// ---------- link -> news ----------
+const sig=()=>AbortSignal.timeout(12000),host=u=>{try{return new URL(u).hostname.replace(/^www\./,'')}catch{return''}};
+async function getPage(u){const tries=[async()=>{const r=await fetch('/api/extract?url='+enc(u),{signal:sig()});const d=await r.json();if(!r.ok||d.error)throw 0;return{api:d}},
+  async()=>{const r=await fetch('https://api.allorigins.win/get?url='+enc(u),{signal:sig()});const j=await r.json();if(!j.contents)throw 0;return{html:j.contents}},
+  async()=>{const r=await fetch('https://corsproxy.io/?url='+enc(u),{signal:sig()});if(!r.ok)throw 0;return{html:await r.text()}},
+  async()=>{const r=await fetch('https://api.codetabs.com/v1/proxy?quest='+enc(u),{signal:sig()});if(!r.ok)throw 0;return{html:await r.text()}}];
+  for(const f of tries){try{return await f()}catch(e){}}return null}
+const BAD=/^data:|\.svg|\.gif|logo|icon|sprite|avatar|pixel|blank|spacer|placeholder|emoji|favicon|\/ads?\/|banner/i;
+function parse(html,u){const d=new DOMParser().parseFromString(html,'text/html'),m=(...ns)=>{for(const n of ns){const e=d.querySelector(`meta[property="${n}"],meta[name="${n}"]`);if(e&&e.content&&e.content.trim())return e.content.trim()}return''};
+  const imgs=[],add=(x,w,force)=>{try{if(!x)return;x=new URL(String(x).trim(),u).href;if(!force&&BAD.test(x))return;if(!imgs.some(q=>q.u===x))imgs.push({u:x,w:w||0})}catch(e){}};
+  ['og:image:secure_url','og:image','og:image:url','twitter:image','twitter:image:src'].forEach(n=>add(m(n),1e9,true));
+  const lk=d.querySelector('link[rel="image_src"]');if(lk)add(lk.getAttribute('href'),9e8,true);
+  d.querySelectorAll('script[type="application/ld+json"]').forEach(sc=>{try{const walk=o=>{if(!o||typeof o!=='object')return;if(Array.isArray(o))return o.forEach(walk);[o.image,o.thumbnailUrl].forEach(im=>{if(im)(Array.isArray(im)?im:[im]).forEach(x=>add(typeof x==='string'?x:x&&(x.url||x.contentUrl),5e8))});Object.values(o).forEach(walk)};walk(JSON.parse(sc.textContent))}catch(e){}});
+  const scope=d.querySelector('article,[itemprop="articleBody"],main')||d.body||d;
+  scope.querySelectorAll('img,source').forEach(i=>{const ss=i.getAttribute('srcset')||i.getAttribute('data-srcset');let best=null;
+    if(ss)ss.split(',').forEach(pp=>{const q=pp.trim().split(/\s+/),w=parseInt(q[1])||(q[1]&&/x$/.test(q[1])?parseFloat(q[1])*1000:0);if(q[0]&&(!best||w>best.w))best={u:q[0],w}});
+    if(best)add(best.u,best.w);else['data-src','data-lazy-src','data-original','src'].forEach(a=>add(i.getAttribute(a),1))});
+  const cl=d.querySelector('link[rel="canonical"]');let canon='';try{if(cl)canon=new URL(cl.getAttribute('href'),u).href}catch(e){}
+  return{title:m('og:title','twitter:title')||(d.title||'').trim(),images:imgs.sort((a,b)=>b.w-a.w).map(x=>x.u).slice(0,8),site:m('og:site_name')||host(u),video:m('og:video:secure_url','og:video:url','og:video'),desc:m('og:description','twitter:description','description'),url:m('og:url')||canon||u}}
+function cleanTitle(t,site,u){t=(t||'').replace(/\s+/g,' ').trim();const n=x=>(x||'').toLowerCase().replace(/[^\p{L}\p{N}]/gu,''),sn=n(site),hn=n(host(u).split('.')[0]);
+  for(let k=0;k<2;k++){const m=t.match(/^(.*\S)\s+([|–—•»-])\s+([^|–—•»]+)$/);if(!m)break;const last=n(m[3]),pipe=m[2]==='|'||m[2]==='•'||m[2]==='»';
+    const match=last.length>=3&&((sn&&(sn.includes(last)||last.includes(sn)))||(hn&&(hn.includes(last)||last.includes(hn))));
+    if(match||(pipe&&m[3].trim().split(' ').length<=4&&m[1].length>=m[3].length*2))t=m[1];else break}
+  return t}
+async function getVideoBlob(u){const tries=[()=>fetch(u,{signal:AbortSignal.timeout(90000)}),()=>fetch('https://corsproxy.io/?url='+enc(u),{signal:AbortSignal.timeout(90000)})];for(const f of tries){try{const r=await f();if(r.ok){const b=await r.blob();if(b.size>1e4&&/video|octet/.test(b.type||'video'))return b}}catch(e){}}return null}
+// full-quality photo loading: try bigger version of the URL, original file first (no re-compression), proxies only as fallback
+const upg=u=>{try{const x=new URL(u);x.pathname=x.pathname.replace(/-\d{2,4}x\d{2,4}(\.[a-z]{3,4})$/i,'$1');['w','width'].forEach(k=>{if(x.searchParams.has(k)&&+x.searchParams.get(k)<2400)x.searchParams.set(k,2400)});['h','height'].forEach(k=>x.searchParams.delete(k));return x.href}catch(e){return u}};
+const loadImg=(src,cors)=>new Promise(ok=>{const im=new Image();if(cors)im.crossOrigin='anonymous';const t=setTimeout(()=>ok(null),9000);im.onload=()=>{clearTimeout(t);ok(im.naturalWidth?im:null)};im.onerror=()=>{clearTimeout(t);ok(null)};im.src=src});
+async function loadBest(u,api){const ups=[upg(u),u].filter((x,i,a)=>a.indexOf(x)===i);
+  for(const x of ups){const ways=api?['/api/img?url='+enc(x)]:[x,'https://images.weserv.nl/?url='+enc(x)+'&output=jpg&q=100','https://corsproxy.io/?url='+enc(x)];
+    for(const w of ways){const im=await loadImg(w,true);if(im&&im.naturalWidth>=300)return im}}return null}
+$('fetchb').onclick=async()=>{const u=V('src').trim(),b=$('fetchb');if(!/^https?:\/\//.test(u)){msg('আগে একটি সঠিক লিংক দিন');return}
+  b.disabled=true;msg('লিংক থেকে খবর আনা হচ্ছে…');let r={title:'',images:[],site:host(u),url:u},api=false;
+  const yt=u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([\w-]{11})/);
+  try{if(yt){try{const j=await (await fetch('https://noembed.com/embed?url='+enc(u),{signal:sig()})).json();r.title=j.title||'';r.site='YouTube'}catch(e){}
+      r.images=['maxresdefault','hqdefault','hq1','hq2','hq3'].map(n=>`https://img.youtube.com/vi/${yt[1]}/${n}.jpg`)}
+    else if(/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(u)){msg('ভিডিও নামানো হচ্ছে…');const bl=await getVideoBlob(u);if(!bl)throw new Error('ভিডিও লিংক থেকে নামানো যায়নি (সাইট আটকে দিয়েছে) — ভিডিও ফাইলটি নিচে দিন');await useVideo(new File([bl],'video.mp4',{type:bl.type||'video/mp4'}));b.disabled=false;return}
+    else{const g=await getPage(u);if(g){api=!!g.api;r=g.api?{title:g.api.title,images:g.api.images||[],site:g.api.site,video:g.api.video,desc:g.api.desc||g.api.description||'',url:g.api.url||u}:parse(g.html,u)}}
+    if(!r.title&&!r.images.length)throw new Error('লিংক থেকে কিছু আনা যায়নি (সাইট আটকে দিতে পারে)। ভিডিও ফাইল বা নিজের ছবি দিন, আর শিরোনাম হাতে লিখুন।');
+    if(r.title)$('hl').value=cleanTitle(r.title,r.site,u);
+    META={url:r.url||u,site:r.site||host(u),desc:r.desc||''};$('aurl').value=META.url;AU={fn:1,alt:1,cap:1,kw:1};
+    msg('ছবি আনা হচ্ছে (সবচেয়ে বড় মাপের)…');
+    const got=(await Promise.all(r.images.slice(0,8).map((i,k)=>loadBest(i,api).then(im=>im&&{im,k,sc:im.naturalWidth*im.naturalHeight*(k===0?1.6:1)})))).filter(Boolean).sort((a,b)=>b.sc-a.sc||a.k-b.k).filter((x,i,a)=>a.findIndex(y=>y.im.src===x.im.src)===i);
+    photos=got.map(x=>x.im);pick=0;SL=[];curSlot=0;buildSlots();syncSlot();thumbs();render();
+    if(r.video&&/^https?:/.test(r.video)){msg('ভিডিও নামানো হচ্ছে…');const vb=await getVideoBlob(r.video);if(vb)await useVideo(new File([vb],'video.mp4',{type:vb.type||'video/mp4'}),true)}
+    if(!photos.length)msg(T('⚠️ '+r.site+' থেকে শিরোনাম এসেছে, কিন্তু ছবি আনা যায়নি — নিজের ছবি বা ভিডিও ফাইল দিন','⚠️ Headline fetched from '+r.site+' but no photo could be loaded — add your own photo or video file'));
+    else msg(T('✅ '+r.site+' থেকে আনা হয়েছে — ছবি বেছে নিন, শিরোনাম মিলিয়ে নিন'+(r.site==='YouTube'?'। যেকোনো সেকেন্ডের ছবি চাইলে ভিডিও ফাইল দিন':''),'✅ Fetched from '+r.site+' — pick a photo and verify the headline'+(r.site==='YouTube'?'. For an exact second, add the video file':'')))}
+  catch(e){msg('❌ '+tr(e.message))}b.disabled=false};
+// paste a link or press Enter = start automatically
+$('src').addEventListener('keydown',e=>{if(e.key==='Enter')$('fetchb').click()});
+$('src').addEventListener('paste',()=>setTimeout(()=>{if(/^https?:\/\/\S+$/.test(V('src').trim()))$('fetchb').click()},80));
+// ---------- drawing helpers ----------
+const shade=(c,a)=>{const n=parseInt(c.slice(1),16),f=v=>Math.round(clamp(a<0?v*(1+a):v+(255-v)*a,0,255));return `rgb(${f(n>>16)},${f(n>>8&255)},${f(n&255)})`};
+const hexA=(c,a)=>{const n=parseInt(c.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`};
+const ink=c=>{const n=parseInt(c.slice(1),16),l=.299*(n>>16)+.587*(n>>8&255)+.114*(n&255);return l>150?'#111':'#fff'};
+const rr=(x,y,w,h,r)=>{cx.beginPath();cx.roundRect(x,y,w,h,r)},ease=q=>{q=clamp(q,0,1);const c=1.70158,x=q-1;return 1+(c+1)*x*x*x+c*x*x};
+function ci(im,x,y,w,h,z,P){P=P||{z:1,x:0,y:0};const iw=im.videoWidth||im.naturalWidth,ih=im.videoHeight||im.naturalHeight;if(!iw)return{ovx:0,ovy:0};const k=Math.max(w/iw,h/ih)*z*P.z,dw=iw*k,dh=ih*k,ovx=Math.max(0,(dw-w)/2),ovy=Math.max(0,(dh-h)/2),ox=ovx*P.x,oy=ovy*P.y;cx.save();cx.beginPath();cx.rect(x,y,w,h);cx.clip();cx.drawImage(im,x+(w-dw)/2-ox,y+(h-dh)/2-oy,dw,dh);cx.restore();return{ovx,ovy}}
+function cover(x,y,w,h,z){const lay=LAY[S.lay||'1'],Pn=i=>(S.P&&S.P[i])||slotP(i);
+  if(lay.n===1||!S.imgs){const im=S.a;if(!im)return;const inf=ci(im,x,y,w,h,z,Pn(0));REG.push({i:0,x,y,w,h,ovx:inf.ovx,ovy:inf.ovy});if(S.b&&S.mix>0){cx.globalAlpha=S.mix;ci(S.b,x,y,w,h,z,Pn(0));cx.globalAlpha=1}return}
+  lay.r.forEach((f,i)=>{const sx=x+f[0]*w,sy=y+f[1]*h,sw=f[2]*w,sh=f[3]*h,im=S.imgs[i];if(!im){cx.fillStyle='rgba(255,255,255,.08)';cx.fillRect(sx,sy,sw,sh);REG.push({i,x:sx,y:sy,w:sw,h:sh,ovx:0,ovy:0});return}const inf=ci(im,sx,sy,sw,sh,z,Pn(i));REG.push({i,x:sx,y:sy,w:sw,h:sh,ovx:inf.ovx,ovy:inf.ovy})});
+  const g=Math.max(3,6*G.u);cx.save();cx.beginPath();cx.rect(x,y,w,h);cx.clip();cx.strokeStyle='#fff';cx.lineWidth=g;cx.beginPath();
+  lay.r.forEach(f=>{const sx=x+f[0]*w,sy=y+f[1]*h,sw=f[2]*w,sh=f[3]*h;if(f[0]>.001){cx.moveTo(sx,sy);cx.lineTo(sx,sy+sh)}if(f[1]>.001){cx.moveTo(sx,sy);cx.lineTo(sx+sw,sy)}});cx.stroke();cx.restore()}
+// headline text with per-word highlight
+function toks(t){let on=false;return t.split('\n').map(p=>{const out=[];p.split(/\s+/).filter(Boolean).forEach(w=>{if(w==='*'){on=!on;return}const st=w[0]==='*',en=w.length>1&&w.endsWith('*');if(st)on=true;const c=w.replace(/\*/g,'');if(c)out.push({w:c,h:on});if(en)on=false});return out})}
+function wrapT(P,mw){const out=[];P.forEach(p=>{let l=[];p.forEach(t=>{const n=l.concat([t]);if(cx.measureText(n.map(x=>x.w).join(' ')).width>mw&&l.length){out.push(l);l=[t]}else l=n});if(l.length)out.push(l)});return out}
+function hfit(o,u,w,maxH,max,min){const P=toks(o.hl);let s=Math.round(max*u),L;const lo=min*u;for(;s>=lo;s-=2){cx.font=`800 ${s}px ${F}`;L=wrapT(P,w);if(L.length*s*o.lh<=maxH)break}
+  s=Math.max(8,Math.round(s*o.sc/100));cx.font=`800 ${s}px ${F}`;L=wrapT(P,w);if(o.hn>0)L.slice(-o.hn).forEach(l=>l.forEach(t=>t.h=true));return{s,L,lh:s*o.lh,bh:L.length*s*o.lh}}
+function lines(L,x0,w,y0,s,lh,o,A,sh){cx.font=`800 ${s}px ${F}`;cx.textBaseline='alphabetic';cx.textAlign='left';if(sh){cx.shadowColor='rgba(0,0,0,.55)';cx.shadowBlur=s*.18;cx.shadowOffsetY=s*.05}
+  const N=L.reduce((a,l)=>a+l.length,0),sp=cx.measureText(' ').width;let k=0;
+  L.forEach((l,i)=>{const lw=cx.measureText(l.map(t=>t.w).join(' ')).width;let x=o.al==='center'?x0+(w-lw)/2:o.al==='right'?x0+w-lw:x0;
+    l.forEach(t=>{let q=1;if(A)q=clamp(A.rv*(N+2)-k,0,1);cx.globalAlpha=q;cx.fillStyle=t.h?o.hc:o.tc;cx.fillText(t.w,x,y0+i*lh+(1-q)*s*.6);x+=cx.measureText(t.w).width+sp;k++})});
+  cx.globalAlpha=1;cx.shadowColor='transparent';cx.shadowBlur=0;cx.shadowOffsetY=0}
+function hdraw(f,x0,w,y,A,sh){lines(f.L,x0,w,y+(f.lh-f.s)/2+f.s*.85,f.s,f.lh,G.o,A,sh)}
+function spm(o,u){const q=o.sp?Math.round(40*u*o.sps/100):0;return{s:q,h:q?q*1.5+6*u:0}}
+function spdraw(x0,w,y,sm,A){const{o}=G;if(!sm.s)return;let q=sm.s;cx.font=`700 ${q}px ${F}`;let tw=cx.measureText(o.sp).width;while(tw>w&&q>sm.s*.5){q-=2;cx.font=`700 ${q}px ${F}`;tw=cx.measureText(o.sp).width}
+  const x=o.al==='center'?x0+(w-tw)/2:o.al==='right'?x0+w-tw:x0;cx.fillStyle=o.spc;cx.textBaseline='alphabetic';cx.textAlign='left';if(A)cx.globalAlpha=clamp(A.rv*1.8-.4,0,1);cx.fillText(o.sp,x,y+(sm.h-q)/2+q*.85);cx.globalAlpha=1}
+function qmark(x0,w,y,A){const{u,o}=G;cx.font=`800 ${130*u}px ${F}`;const qw=cx.measureText('“').width,x=o.al==='center'?x0+(w-qw)/2:o.al==='right'?x0+w-qw:x0;cx.fillStyle=o.hc;cx.globalAlpha=(A?clamp(A.rv*2,0,1):1)*.85;cx.textBaseline='alphabetic';cx.textAlign='left';cx.fillText('“',x,y+96*u);cx.globalAlpha=1}
+function headline(x0,w,top,bot,max,min,A,sh,va){const{u,o}=G,sm=spm(o,u),qh=o.qm?64*u:0;x0+=o.lxo*u;const f=hfit(o,u,w,Math.max(40*u,bot-top-sm.h-qh),max,min),tot=f.bh+sm.h+qh;let y=va==='bottom'?bot-tot:va==='top'?top:top+(bot-top-tot)/2;y+=o.ly*u;if(qh)qmark(x0,w,y,A);hdraw(f,x0,w,y+qh,A,sh);spdraw(x0,w,y+qh+f.bh,sm,A);return{top:y,y:y+qh,bh:f.bh}}
+function pillAt(x,yc,al,text,fill,col,pp){const{u}=G;cx.font=`800 ${30*u}px ${F}`;const pw=cx.measureText(text).width+44*u,h=56*u,x0=al==='c'?x-pw/2:al==='r'?x-pw:x;cx.save();cx.translate(x0+pw/2,yc);cx.scale(pp,pp);cx.fillStyle=fill;rr(-pw/2,-h/2,pw,h,h/2);cx.fill();cx.fillStyle=col;cx.textBaseline='middle';cx.textAlign='center';cx.fillText(text,0,2*u);cx.restore();cx.textAlign='left';cx.textBaseline='alphabetic'}
+function tagP(x,yc,al,pp){const{o}=G;if(o.ctag&&o.tag)pillAt(x,yc,al,o.tag,o.tgc,ink(o.tgc),pp)}
+// logo
+function logoDraw(ax,y,al,mw,mh,sty,nohit){const{u,o}=G;if(!logo)return null;sty=sty||o.lsty;const iw=logo.naturalWidth,ih=logo.naturalHeight,k=Math.min(mw/iw,mh/ih),w=iw*k,h=ih*k;let x,r;
+  if(sty==='circle'){const d=Math.min(mw,mh),k2=Math.min(d*.78/iw,d*.78/ih);x=al==='c'?ax-d/2:al==='r'?ax-d:ax;cx.save();cx.beginPath();cx.arc(x+d/2,y+d/2,d/2,0,7);cx.clip();cx.fillStyle='#fff';cx.fillRect(x,y,d,d);cx.drawImage(logo,x+(d-iw*k2)/2,y+(d-ih*k2)/2,iw*k2,ih*k2);cx.restore();r={x,y,w:d,h:d}}
+  else if(sty==='card'){const p=10*u,bw=w+2*p,bh=h+2*p;x=al==='c'?ax-bw/2:al==='r'?ax-bw:ax;cx.save();cx.shadowColor='rgba(0,0,0,.3)';cx.shadowBlur=12*u;cx.fillStyle='#fff';rr(x,y,bw,bh,14*u);cx.fill();cx.restore();cx.drawImage(logo,x+p,y+p,w,h);r={x,y,w:bw,h:bh}}
+  else{x=al==='c'?ax-w/2:al==='r'?ax-w:ax;cx.save();cx.shadowColor='rgba(0,0,0,.35)';cx.shadowBlur=10*u;cx.drawImage(logo,x,y,w,h);cx.restore();r={x,y,w,h}}
+  if(!nohit)HIT.push({id:'logo',x:r.x,y:r.y,w:r.w,h:r.h});return r}
+function topLogo(lp){const{W,H,u,o}=G;if(!logo)return;const m=34*u,mw=190*u*o.ls,mh=120*u*o.ls;if(lp==='tl')logoDraw(m,m,'l',mw,mh);else if(lp==='tc')logoDraw(W/2,m,'c',mw,mh);else if(lp==='tr')logoDraw(W-m,m,'r',mw,mh);else if(lp==='free'){const w=W*.18*o.ls,r=o.lsty==='circle'?w:w*logo.naturalHeight/logo.naturalWidth+(o.lsty==='card'?20*u:0);logoDraw(LG.x*W,LG.y*H-r/2,'c',w,H)}}
+function drawStickers(){const{W,H,u}=G;ST.forEach((q,i)=>{const w=W*.2*q.s/100,h=w*q.im.naturalHeight/q.im.naturalWidth,x=q.x*W-w/2,y=q.y*H-h/2;cx.save();cx.shadowColor='rgba(0,0,0,.3)';cx.shadowBlur=8*u;cx.drawImage(q.im,x,y,w,h);cx.restore();HIT.push({id:i,x,y,w,h})})}
+// social chip: icons + /handle + verified tick
+function chip(x,y,al){const{u,o}=G;if(!o.handle)return;const t='/'+o.handle.replace(/^[@\/]+/,'');cx.font=`500 ${26*u}px ${F}`;const tw=cx.measureText(t).width,ic=28*u,gp=6*u,h=46*u,w=14*u+4*ic+3*gp+10*u+tw+10*u+ic+12*u,bx=al==='r'?x-w:al==='c'?x-w/2:x,cy=y+h/2;
+  cx.fillStyle='rgba(70,70,75,.62)';rr(bx,y,w,h,12*u);cx.fill();
+  const c=i=>bx+14*u+ic/2+i*(ic+gp);cx.fillStyle='#fff';for(let i=0;i<4;i++){cx.beginPath();cx.arc(c(i),cy,ic/2,0,7);cx.fill()}
+  cx.fillStyle='#333';cx.textBaseline='middle';cx.textAlign='center';cx.font=`800 ${19*u}px ${F}`;cx.fillText('f',c(0),cy+1*u);cx.fillText('♪',c(3),cy+1*u);
+  cx.beginPath();cx.moveTo(c(1)-5*u,cy-6*u);cx.lineTo(c(1)+7*u,cy);cx.lineTo(c(1)-5*u,cy+6*u);cx.fill();
+  cx.strokeStyle='#333';cx.lineWidth=2.2*u;rr(c(2)-7*u,cy-7*u,14*u,14*u,4*u);cx.stroke();cx.beginPath();cx.arc(c(2),cy,3.2*u,0,7);cx.stroke();
+  const tx=bx+14*u+4*ic+3*gp+10*u;cx.textAlign='left';cx.fillStyle='#fff';cx.font=`500 ${26*u}px ${F}`;cx.fillText(t,tx,cy+2*u);
+  const vx=tx+tw+10*u+ic/2;cx.fillStyle='#1d9bf0';cx.beginPath();cx.arc(vx,cy,ic/2-1*u,0,7);cx.fill();cx.strokeStyle='#fff';cx.lineWidth=2.6*u;cx.beginPath();cx.moveTo(vx-5*u,cy+.5*u);cx.lineTo(vx-1.5*u,cy+4.5*u);cx.lineTo(vx+5.5*u,cy-4*u);cx.stroke();
+  cx.textBaseline='alphabetic'}
+function infoRow(h,tcol,lcol){const{W,u,o}=G,y=h-22*u,web=o.web||(o.csrc?o.src:'');if(!o.dt&&!web&&!o.more)return;cx.fillStyle=lcol;cx.fillRect(28*u,h-58*u,W-56*u,1.5*u);cx.font=`500 ${24*u}px ${F}`;cx.fillStyle=o.ic;cx.globalAlpha=.92;cx.textBaseline='alphabetic';
+  if(o.dt){cx.textAlign='left';cx.fillText(o.dt,36*u,y)}if(web){cx.textAlign='center';cx.fillText(web,W/2,y)}if(o.more){cx.textAlign='right';cx.fillText(o.more,W-36*u,y)}cx.textAlign='left';cx.globalAlpha=1}
+// ad slot
+const adHeight=(W,H,o)=>o.adm==='ad'&&adImg?clamp(W*adImg.naturalHeight/adImg.naturalWidth,H*.06,H*.3):o.adm==='blank'?H*o.adh/100:0;
+function drawAd(W,H,o,h){if(o.adm==='ad'&&adImg){const iw=adImg.naturalWidth,ih=adImg.naturalHeight,k=Math.max(W/iw,(H-h)/ih);cx.save();cx.beginPath();cx.rect(0,h,W,H-h);cx.clip();cx.drawImage(adImg,(W-iw*k)/2,h+(H-h-ih*k)/2,iw*k,ih*k);cx.restore()}else if(o.adm==='blank'){cx.fillStyle=o.bg;cx.fillRect(0,h,W,H-h)}}
+// ---------- main draw ----------
+function draw(W,H,o,z,A){F=o.f;cx.imageSmoothingEnabled=true;cx.imageSmoothingQuality='high';const u=Math.min(W,H*.8)/1080,pad=48*u,tw=W-pad*2,t=A?A.t:9,pp=A?ease((t-.25)/.5):1,dk=o.dk/100,TT=o.tpl;G={W,H,u,o};HIT=[];REG=[];PH={z:o.pz/100,x:o.pxo/100,y:o.pyo/100};
+  cx.clearRect(0,0,W,H);const ah=adHeight(W,H,o),h=H-ah,lp=o.lpos==='auto'?DEFLP[TT]:o.lpos;cx.fillStyle=o.bg;cx.fillRect(0,0,W,H);
+  const g=cx.createLinearGradient(0,0,W,h);g.addColorStop(0,'#0b1b3a');g.addColorStop(1,o.c1);
+  const full=(a0,a1)=>{cx.fillStyle=g;cx.fillRect(0,0,W,h);cover(0,0,W,h,z);const ts=cx.createLinearGradient(0,0,0,h*.18);ts.addColorStop(0,`rgba(0,0,0,${dk*.4})`);ts.addColorStop(1,'rgba(0,0,0,0)');cx.fillStyle=ts;cx.fillRect(0,0,W,h*.18);const gr=cx.createLinearGradient(0,h*a0,0,h);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(a1,`rgba(0,0,0,${Math.min(.95,dk*1.3)})`);cx.fillStyle=gr;cx.fillRect(0,h*a0,W,h*(1-a0)+1)};
+  let chipOk=true;
+  if(TT==='A'){const ph=h*o.pa/100;cx.fillStyle=g;cx.fillRect(0,0,W,ph);cover(0,0,W,ph,z);
+    const pg=cx.createLinearGradient(0,ph,0,h);pg.addColorStop(0,o.bg);pg.addColorStop(1,shade(o.bg,-.4));cx.fillStyle=pg;cx.fillRect(0,ph,W,h-ph+1);cx.fillStyle='#fff';cx.fillRect(0,ph,W,3*u);
+    infoRow(h,'rgba(255,255,255,.88)','rgba(255,255,255,.28)');headline(pad,tw,ph+22*u,h-76*u,92,28,A,0,'mid');tagP(pad,ph-42*u,'l',pp)}
+  else if(TT==='B'){chipOk=false;const hh=Math.max(h*(1-o.pa/100),300*u);cx.fillStyle=g;cx.fillRect(0,hh,W,h-hh);cover(0,hh,W,h-hh,z);
+    const hg=cx.createLinearGradient(0,0,0,hh);hg.addColorStop(0,shade(o.bg,-.3));hg.addColorStop(1,o.bg);cx.fillStyle=hg;cx.fillRect(0,0,W,hh);
+    const fg=cx.createLinearGradient(0,hh,0,hh+46*u);fg.addColorStop(0,hexA(o.bg,.9));fg.addColorStop(1,hexA(o.bg,0));cx.fillStyle=fg;cx.fillRect(0,hh,W,46*u);
+    headline(pad,tw,128*u,hh-14*u,72,26,A,0,'mid');
+    if(o.dt){cx.font=`700 ${26*u}px ${F}`;const dw=cx.measureText(o.dt).width+44*u,dx=lp==='tr'?36*u:W-36*u-dw,dg=cx.createLinearGradient(dx,0,dx+dw,0);dg.addColorStop(0,'rgba(255,255,255,.04)');dg.addColorStop(1,'rgba(255,255,255,.24)');cx.fillStyle=dg;rr(dx,36*u,dw,46*u,12*u);cx.fill();cx.fillStyle=o.ic;cx.textBaseline='middle';cx.fillText(o.dt,dx+22*u,36*u+24*u);cx.textBaseline='alphabetic'}
+    const wb=o.web||(o.csrc?o.src:'');if(wb){cx.font=`500 ${26*u}px ${F}`;cx.fillStyle=o.ic;cx.textAlign='center';cx.fillText(wb,W/2,66*u);cx.textAlign='left'}
+    tagP(36*u,h-46*u,'l',pp);chip(W-36*u,h-72*u,'r');cx.strokeStyle=o.c1;cx.lineWidth=10*u;cx.strokeRect(5*u,5*u,W-10*u,h-10*u)}
+  else if(TT==='C'){cx.fillStyle=o.bg;cx.fillRect(0,0,W,h);const ph=h*o.pa/100;cx.fillStyle=g;cx.fillRect(0,0,W,ph);cover(0,0,W,ph,z);
+    const fg=cx.createLinearGradient(0,ph*.6,0,ph);fg.addColorStop(0,hexA(o.bg,0));fg.addColorStop(1,o.bg);cx.fillStyle=fg;cx.fillRect(0,ph*.6,W,ph*.4+1);
+    const lab=o.more||(o.ctag?o.tag:'');if(lab)pillAt(W/2,ph-8*u,'c',lab,o.c2,ink(o.c2),pp);
+    const wb=o.web||(o.csrc?o.src:''),inf=[o.dt,wb].filter(Boolean).join('   ।   '),lineY=h-64*u,tcol=o.ic;
+    cx.fillStyle=o.c2;cx.fillRect(W/2-150*u,lineY,300*u,2*u);if(inf){cx.font=`500 ${24*u}px ${F}`;cx.fillStyle=tcol;cx.globalAlpha=.8;cx.textAlign='center';cx.fillText(inf,W/2,h-22*u);cx.textAlign='left';cx.globalAlpha=1}
+    let bot=lineY-20*u;if(lp==='mid'&&logo){const mw=260*u*o.ls,mh=110*u*o.ls,k=Math.min(mw/logo.naturalWidth,mh/logo.naturalHeight),lhh=logo.naturalHeight*k+(o.lsty==='card'?20*u:0),ly0=lineY-16*u-lhh;logoDraw(W/2,ly0,'c',mw,mh);bot=ly0-14*u}
+    headline(pad,tw,ph+28*u,bot,84,28,A,0,'mid')}
+  else if(TT==='D'){chipOk=false;const ph=h*o.pa/100,sy=h-30*u,pa=h-ph;cx.fillStyle=g;cx.fillRect(0,0,W,ph);cover(0,0,W,ph,z);
+    const ts=cx.createLinearGradient(0,0,0,h*.16);ts.addColorStop(0,`rgba(0,0,0,${dk*.55})`);ts.addColorStop(1,'rgba(0,0,0,0)');cx.fillStyle=ts;cx.fillRect(0,0,W,h*.16);
+    const pg=cx.createLinearGradient(0,ph,0,h);pg.addColorStop(0,o.c1);pg.addColorStop(1,shade(o.c1,-.5));cx.fillStyle=pg;cx.fillRect(0,ph,W,pa+1);
+    cx.save();cx.beginPath();cx.rect(0,ph,W,pa);cx.clip();cx.globalAlpha=.07;cx.fillStyle='#fff';cx.beginPath();cx.arc(W*.9,ph+pa*.6,270*u,0,7);cx.fill();cx.beginPath();cx.arc(W*1.0,ph+pa*.05,150*u,0,7);cx.fill();cx.restore();
+    const sg=cx.createLinearGradient(0,ph-34*u,0,ph);sg.addColorStop(0,'rgba(0,0,0,0)');sg.addColorStop(1,'rgba(0,0,0,.4)');cx.fillStyle=sg;cx.fillRect(0,ph-34*u,W,34*u);cx.fillStyle=o.c2;cx.fillRect(0,ph,W,6*u);
+    if(lp==='tab'){let th=66*u,tbw,lw=0,lh2=0;cx.font=`800 ${40*u}px ${F}`;if(logo){const k=Math.min(240*u*o.ls/logo.naturalWidth,96*u*o.ls/logo.naturalHeight);lw=logo.naturalWidth*k;lh2=logo.naturalHeight*k;th=lh2+26*u;tbw=lw+34*u}else tbw=cx.measureText(o.ch).width+56*u;
+      const tx0=(W-tbw)/2,ty=ph-th*.55;cx.save();cx.shadowColor='rgba(0,0,0,.45)';cx.shadowBlur=20*u;cx.shadowOffsetY=8*u;cx.fillStyle=shade(o.c1,-.4);rr(tx0,ty,tbw,th,14*u);cx.fill();cx.restore();
+      cx.save();rr(tx0,ty,tbw,th,14*u);cx.clip();cx.fillStyle=o.c2;cx.fillRect(tx0,ty+th-6*u,tbw,6*u);cx.restore();
+      if(logo)logoDraw(tx0+(tbw-lw)/2,ty+(th-6*u-lh2)/2,'l',lw,lh2,'plain');else{cx.fillStyle='#fff';cx.textBaseline='middle';cx.textAlign='center';cx.fillText(o.ch,W/2,ty+th/2-3*u);cx.textAlign='left';cx.textBaseline='alphabetic'}}
+    if(o.dt){cx.font=`500 ${25*u}px ${F}`;cx.fillStyle=o.ic;cx.globalAlpha=.9;cx.textAlign='right';cx.fillText(o.dt,W-pad,ph+58*u);cx.textAlign='left';cx.globalAlpha=1}
+    const r=headline(pad+30*u,tw-30*u,ph+100*u,sy-56*u,80,26,A,0,'mid');cx.fillStyle=o.c2;cx.fillRect(pad+o.lxo*u,r.y,4*u,r.bh);
+    const it=[],wb=o.web||(o.csrc?o.src:'');if(wb)it.push(['w',wb]);if(o.handle)it.push(['f',o.handle.replace(/^[@\/]+/,'')]);let fs=26*u;const gap=34*u,wd=()=>it.reduce((a,i)=>a+fs*1.35+10*u+cx.measureText(i[1]).width+gap,-gap);cx.font=`500 ${fs}px ${F}`;let tt=wd();if(it.length&&tt>tw){fs*=tw/tt;cx.font=`500 ${fs}px ${F}`}
+    let x=pad;it.forEach(([kd,tx])=>{const d=fs*1.3,cy=sy-fs*.32;cx.fillStyle='#fff';cx.globalAlpha=.95;
+      if(kd==='w'){cx.beginPath();cx.moveTo(x,cy-d*.38);cx.lineTo(x+d*.62,cy);cx.lineTo(x,cy+d*.38);cx.fill()}
+      else{cx.beginPath();cx.arc(x+d/2,cy,d/2,0,7);cx.fill();cx.fillStyle=shade(o.c1,-.3);cx.font=`800 ${d*.8}px ${F}`;cx.textAlign='center';cx.fillText('f',x+d/2+d*.04,cy+d*.32);cx.textAlign='left'}
+      cx.globalAlpha=.92;cx.fillStyle=o.ic;cx.font=`500 ${fs}px ${F}`;const ox=x+d+10*u;cx.fillText(tx,ox,sy);x=ox+cx.measureText(tx).width+gap;cx.globalAlpha=1});
+    tagP(lp==='tr'?pad:W-pad,pad+10*u,lp==='tr'?'l':'r',pp)}
+  else if(TT==='E'){full(.3,.85);infoRow(h,'rgba(255,255,255,.9)','rgba(255,255,255,.35)');const r=headline(pad,tw,h*.4,h-82*u,88,28,A,1,'bottom');tagP(o.al==='center'?W/2:o.al==='right'?W-pad:pad,r.top-34*u,o.al==='center'?'c':o.al==='right'?'r':'l',pp)}
+  else if(TT==='F'){full(.1,1);infoRow(h,'rgba(255,255,255,.9)','rgba(255,255,255,.35)');const sm=spm(o,u),f=hfit(o,u,tw-70*u,h*.32-sm.h,70,26),bh=f.bh+sm.h+76*u,by=h-86*u-bh+o.ly*u,fx=pad+35*u+o.lxo*u;cx.fillStyle='rgba(255,255,255,.16)';rr(pad,by,tw,bh,36*u);cx.fill();cx.strokeStyle='rgba(255,255,255,.55)';cx.lineWidth=2.5*u;cx.stroke();hdraw(f,fx,tw-70*u,by+38*u,A,1);spdraw(fx,tw-70*u,by+38*u+f.bh,sm,A);
+    tagP(o.al==='center'?W/2:o.al==='right'?W-pad:pad,by-34*u,o.al==='center'?'c':o.al==='right'?'r':'l',pp)}
+  else{full(0,.5);cx.fillStyle=`rgba(0,0,0,${dk*.35})`;cx.fillRect(0,0,W,h);infoRow(h,'rgba(255,255,255,.9)','rgba(255,255,255,.35)');const sm=spm(o,u),f=hfit(o,u,tw,h*.55-sm.h,92,28),y=(h-f.bh-sm.h)/2+o.ly*u,gx=pad+o.lxo*u;cx.fillStyle=o.c2;cx.font=`800 ${240*u}px ${F}`;cx.globalAlpha=.9;cx.fillText('“',gx,y-10*u+90*u);cx.globalAlpha=1;hdraw(f,gx,tw,y,A,1);spdraw(gx,tw,y+f.bh,sm,A);tagP(pad,pad+90*u+60*u,'l',pp)}
+  if(['tl','tc','tr','free'].includes(lp))topLogo(lp);
+  if(chipOk&&TT!=='B')chip(lp==='tr'?36*u:W-36*u,34*u,lp==='tr'?'l':'r');
+  if(ah>0)drawAd(W,H,o,h);drawStickers();
+  if(A){cx.fillStyle=o.c2;cx.fillRect(0,0,W*A.prog,8*u);if(t<.7){cx.globalAlpha=1-t/.7;cx.fillStyle=o.c1;cx.fillRect(0,0,W,H);cx.fillStyle='#fff';cx.textAlign='center';cx.textBaseline='middle';
+      if(logo){const mw=520*u,mh=300*u,k=Math.min(mw/logo.naturalWidth,mh/logo.naturalHeight);logoDraw(W/2,H/2-logo.naturalHeight*k/2-10*u,'c',mw,mh,'card',true)}else{cx.font=`800 ${110*u*(1+t*.3)}px ${F}`;cx.fillText(o.tag||o.ch,W/2,H/2)}
+      cx.textAlign='left';cx.textBaseline='alphabetic';cx.globalAlpha=1}}}
+function opts(){let s='';try{s=new URL(V('src')).hostname.replace(/^www\./,'')}catch(e){}return{ch:V('ch'),handle:V('handle').trim(),web:V('web').trim(),more:V('more').trim(),dt:V('dt'),hl:V('hl'),tpl,c1:V('c1'),c2:V('c2'),bg:V('bg'),tc:V('tc'),hc:V('hc'),tag:V('tag'),f:`"${V('fnt')}",sans-serif`,al:V('al'),lpos:V('lpos'),lsty:V('lsty'),sc:+V('sc'),lh:+V('lh')/100,ly:+V('ly'),dk:+V('dk'),ls:LG.s/100,sp:V('sp').trim(),sps:+V('sps'),spc:V('spc'),qm:$('qm').checked,lxo:+V('lxo'),ic:V('ic'),tgc:V('tgc'),pa:+V('pa'),pz:+V('pz'),pxo:+V('pxo'),pyo:+V('pyo'),hn:+V('hn'),adm:V('adm'),adh:+V('adh'),ctag:$('ctag').checked,csrc:$('csrc').checked,src:s}}
+const dims=()=>fmt==='custom'?[clamp(+V('sw')||1080,300,3000),clamp(+V('sh')||1350,300,3000)]:fmt.split('x').map(Number);
+function render(){if(busy)return;const[W,H]=dims();if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}S=buildS();draw(W,H,opts(),1,null);if(showSel)drawSel();qualNote();qhint();seoRefresh()}
+function drawSel(){if(LAY[LAYK].n>1){const r=REG.find(x=>x.i===curSlot);if(r){const u=Math.min(cv.width,cv.height*.8)/1080;cx.save();cx.setLineDash([12*u,8*u]);cx.lineWidth=4*u;cx.strokeStyle='rgba(0,0,0,.5)';cx.strokeRect(r.x+4*u,r.y+4*u,r.w-8*u,r.h-8*u);cx.lineWidth=2*u;cx.strokeStyle='#ffd166';cx.strokeRect(r.x+4*u,r.y+4*u,r.w-8*u,r.h-8*u);cx.restore()}}const h=HIT.find(x=>x.id===sel);if(!h)return;const u=Math.min(cv.width,cv.height*.8)/1080;cx.save();cx.setLineDash([14*u,10*u]);cx.lineWidth=5*u;cx.strokeStyle='rgba(0,0,0,.55)';cx.strokeRect(h.x,h.y,h.w,h.h);cx.lineWidth=2.5*u;cx.strokeStyle='#fff';cx.strokeRect(h.x,h.y,h.w,h.h);cx.restore()}
+setAl('center');applyPre(tpl);drawIcons();loadFont().then(()=>document.fonts.load('800 40px "Noto Sans Bengali"')).then(render);document.fonts.ready.then(render);
+let toastT;const toast=t=>{const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('show'),3200)};
+const plain=t=>String(t||'').replace(/\*/g,'').replace(/\s*\n\s*/g,' ').replace(/\s+/g,' ').trim();
+const slug=t=>{t=t.replace(/[^\p{L}\p{M}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'');if(t.length>70){t=t.slice(0,70);const i=t.lastIndexOf('-');if(i>30)t=t.slice(0,i)}return t||'newsmaker-card'};
+const STOP=new Set(['এবং','ও','এর','করে','থেকে','জন্য','হয়েছে','না','যে','এই','সেই','কি','নিয়ে','হবে','করা','দিয়ে','পর','আর','তার','কোন','হলো','ছিল','বলে','বলেছেন','the','and','for','with','that','this','from','are','was','has']);
+const words=t=>t.match(/[\p{L}\p{M}\p{N}]+/gu)||[];
+function tagsOf(){const w=[...new Set(words(plain(V('hl'))).filter(x=>x.length>=4&&!STOP.has(x.toLowerCase())))],top=[...w].sort((a,b)=>b.length-a.length).slice(0,5),t=w.filter(x=>top.includes(x)).map(x=>'#'+x),ch=words(V('ch')).join('');if(ch)t.push('#'+ch);const tg=words(V('tag')).join('');if($('ctag').checked&&tg)t.push('#'+tg);return[...new Set(t)]}
+function seoRefresh(force){if(force)AU={fn:1,alt:1,cap:1,kw:1};const o=opts(),hl=plain(V('hl')),sp=plain(V('sp')),ht=tagsOf(),site=META.site||o.src,url=V('aurl').trim();
+  const set=(id,k,v)=>{if(AU[k]&&$(id).value!==v)$(id).value=v};
+  set('fn','fn',slug(hl));
+  set('alt','alt',[hl,sp,[V('ch'),V('dt')].filter(Boolean).join(', ')].filter(Boolean).join(' — '));
+  set('cap','cap',[[hl,sp].filter(Boolean).join('\n'),[url?T('বিস্তারিত: ','Details: ')+url:'',site?T('সূত্র: ','Source: ')+site:''].filter(Boolean).join('\n'),ht.join(' ')].filter(Boolean).join('\n\n'));
+  set('kw','kw',ht.map(x=>x.slice(1)).join(', '))}
+['fn','alt','cap','kw'].forEach(k=>$(k).addEventListener('input',()=>{AU[k]=0}));
+$('aurl').addEventListener('input',()=>seoRefresh());$('seoauto').onclick=()=>{seoRefresh(true);toast(T('✅ আবার অটো তৈরি হয়েছে','✅ Regenerated'))};
+const copyT=async(t,m)=>{try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy')}catch(er){}x.remove()}toast(m)};
+$('cpc').onclick=()=>copyT(V('cap'),T('✅ ক্যাপশন কপি হয়েছে — ফেসবুক পোস্টে বসান','✅ Caption copied — paste it in your post'));$('cpa').onclick=()=>copyT(V('alt'),T('✅ Alt text কপি হয়েছে','✅ Alt text copied'));
+function qualNote(){const el=$('qn'),im=slotImgs()[curSlot];if(!im){el.textContent='';return}const w=im.naturalWidth,h=im.naturalHeight;el.textContent='📷 '+T('ছবির মাপ: ','Photo size: ')+w+'×'+h+' px — '+(w>=2000?T('✅ Ultra HD এর জন্য যথেষ্ট','✅ enough for Ultra HD'):w>=1080?T('✅ HD, ভালো পরিষ্কার','✅ HD, looks sharp'):T('⚠️ ছোট ছবি — বড় ছবি বেছে নিলে ভালো','⚠️ small photo — a bigger one looks better'))}
+function outDims(){const[W,H]=dims();let k=QS==='ultra'?3:QS==='fb'?2048/W:1;const cap=/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?16e6:40e6;k=Math.max(1,Math.min(k,Math.sqrt(cap/(W*H))));return{W,H,k,w:Math.round(W*k),h:Math.round(H*k)}}
+function qhint(){const d=outDims();$('qh').textContent=d.w+'×'+d.h+' px'+(QS==='fb'?T(' — ফেসবুকের সর্বোচ্চ মাপ; JPG বেছে নিলে ফেসবুকে কম ঝাপসা হবে',' — Facebook\'s max size; JPG gives the least blur'):QS==='ultra'?T(' — সবচেয়ে পরিষ্কার (PNG সেরা)',' — sharpest (PNG is best)'):'')}
+document.querySelectorAll('#qs button').forEach(b=>b.onclick=()=>{QS=b.dataset.q;document.querySelectorAll('#qs button').forEach(x=>x.classList.toggle('on',x===b));qhint()});
+// render the card at full export size on an off-screen canvas
+async function makeBlob(type){await loadFont();const d=outDims();let k=d.k,blob=null,w=d.w,h=d.h;
+  for(let t=0;t<4&&!blob;t++){w=Math.round(d.W*k);h=Math.round(d.H*k);const off=document.createElement('canvas');off.width=w;off.height=h;const old=cx;cx=off.getContext('2d');
+    try{S=buildS();draw(w,h,opts(),1,null)}finally{cx=old}
+    blob=await new Promise(r=>off.toBlob(r,type,.97));if(!blob)k=Math.max(1,k*.75)}
+  render();return{blob,w,h}}
+// embed SEO info inside the image file (PNG iTXt + XMP, JPEG XMP)
+const te=new TextEncoder(),esc=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const CRCT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRCT[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function pngChunk(type,data){const o=new Uint8Array(12+data.length),dv=new DataView(o.buffer);dv.setUint32(0,data.length);for(let i=0;i<4;i++)o[4+i]=type.charCodeAt(i);o.set(data,8);dv.setUint32(8+data.length,crc32(o.subarray(4,8+data.length)));return o}
+function itxt(key,val){const k=te.encode(key),v=te.encode(val),d=new Uint8Array(k.length+5+v.length);d.set(k,0);d.set(v,k.length+5);return pngChunk('iTXt',d)}
+function metaObj(){return{title:plain(V('hl')),desc:V('cap').replace(/\s*\n+\s*/g,' ').trim()||plain(V('hl')),alt:V('alt').trim(),author:V('ch').trim(),kw:V('kw').split(/[,،]/).map(x=>x.trim()).filter(Boolean),source:V('aurl').trim()||META.site||''}}
+function xmpOf(m){const alt=(tag,v)=>'<'+tag+'><rdf:Alt><rdf:li xml:lang="x-default">'+esc(v)+'</rdf:li></rdf:Alt></'+tag+'>';
+  return '<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>\n<x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/">'+
+  alt('dc:title',m.title)+alt('dc:description',m.desc)+(m.author?'<dc:creator><rdf:Seq><rdf:li>'+esc(m.author)+'</rdf:li></rdf:Seq></dc:creator>':'')+(m.kw.length?'<dc:subject><rdf:Bag>'+m.kw.map(k=>'<rdf:li>'+esc(k)+'</rdf:li>').join('')+'</rdf:Bag></dc:subject>':'')+(m.source?'<photoshop:Source>'+esc(m.source)+'</photoshop:Source>':'')+(m.alt?alt('Iptc4xmpCore:AltTextAccessibility',m.alt):'')+'<xmp:CreatorTool>NewsMaker Studio</xmp:CreatorTool></rdf:Description></rdf:RDF></x:xmpmeta>\n<?xpacket end="w"?>'}
+function pngMeta(b,m){if(!(b[12]===0x49&&b[13]===0x48&&b[14]===0x44&&b[15]===0x52))return b;const ch=[['Title',m.title],['Description',m.desc],['Author',m.author],['Source',m.source],['Keywords',m.kw.join(', ')],['Software','NewsMaker Studio'],['XML:com.adobe.xmp',xmpOf(m)]].filter(x=>x[1]).map(x=>itxt(x[0],x[1])),n=ch.reduce((a,c)=>a+c.length,0),o=new Uint8Array(b.length+n);o.set(b.subarray(0,33));let p=33;ch.forEach(c=>{o.set(c,p);p+=c.length});o.set(b.subarray(33),p);return o}
+function jpgMeta(b,m){const x=te.encode(xmpOf(m)),h=te.encode('http://ns.adobe.com/xap/1.0/\0'),len=2+h.length+x.length;if(len>65535||b[0]!==0xFF||b[1]!==0xD8)return b;let p=2;if(b[2]===0xFF&&b[3]===0xE0)p=4+((b[4]<<8)|b[5]);const seg=new Uint8Array(4+h.length+x.length);seg[0]=0xFF;seg[1]=0xE1;seg[2]=len>>8;seg[3]=len&255;seg.set(h,4);seg.set(x,4+h.length);const o=new Uint8Array(b.length+seg.length);o.set(b.subarray(0,p));o.set(seg,p);o.set(b.subarray(p),p+seg.length);return o}
+async function withMeta(blob,type){try{const b=new Uint8Array(await blob.arrayBuffer()),m=metaObj();return new Blob([type==='image/png'?pngMeta(b,m):jpgMeta(b,m)],{type})}catch(e){return blob}}
+async function dl(type,ext){const b0=$('dl'),b1=$('dl2');b0.disabled=b1.disabled=true;toast(T('ছবি তৈরি হচ্ছে…','Preparing image…'));
+  try{const{blob,w,h}=await makeBlob(type);if(!blob)throw 0;const fin=await withMeta(blob,type),a=document.createElement('a'),url=URL.createObjectURL(fin);a.href=url;a.download=(V('fn').trim()||'newsmaker-card')+'.'+ext;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);toast(T('✅ ডাউনলোড হয়েছে — '+w+'×'+h+' px','✅ Downloaded — '+w+'×'+h+' px'))}
+  catch(e){toast(T('ছবি এক্সপোর্ট হয়নি (অন্য সাইটের ছবি আটকেছে) — অন্য ছবি বা নিজের ছবি বেছে নিন','Export failed (the image is blocked by its site) — pick another or your own photo'))}
+  b0.disabled=b1.disabled=false}
+$('dlall').onclick=async()=>{const list=[['1080x1350','facebook-4x5'],['1080x1080','square-1x1'],['1920x1080','youtube-16x9'],['1080x1920','story-9x16']],prev=fmt,b=$('dlall');b.disabled=true;
+  try{for(const[f,nm]of list){fmt=f;render();toast(T('তৈরি হচ্ছে: ','Preparing: ')+nm);const{blob,w,h}=await makeBlob('image/jpeg');if(!blob)continue;const fin=await withMeta(blob,'image/jpeg'),a=document.createElement('a'),url=URL.createObjectURL(fin);a.href=url;a.download=(V('fn').trim()||'newsmaker-card')+'-'+nm+'.jpg';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);await new Promise(r=>setTimeout(r,600))}toast(T('✅ ৪টি সাইজ ডাউনলোড হয়েছে','✅ All 4 sizes downloaded'))}
+  catch(e){toast(T('ডাউনলোড হয়নি — অন্য ছবি বেছে নিন','Download failed — pick another photo'))}
+  fmt=prev;drawIcons();render();b.disabled=false};
+$('dl').onclick=()=>dl('image/png','png');$('dl2').onclick=()=>dl('image/jpeg','jpg');
+if(navigator.share&&navigator.canShare)$('shb').hidden=false;
+$('shb').onclick=async()=>{try{const{blob}=await makeBlob('image/jpeg'),fin=await withMeta(blob,'image/jpeg'),f=new File([fin],(V('fn').trim()||'newsmaker-card')+'.jpg',{type:'image/jpeg'});if(navigator.canShare({files:[f]}))await navigator.share({files:[f],text:V('cap'),title:plain(V('hl'))});else toast(T('এই ডিভাইসে সরাসরি শেয়ার নেই — ডাউনলোড করুন','Direct share is not available here — download instead'))}catch(e){if(!e||e.name!=='AbortError')toast(T('শেয়ার হয়নি — ডাউনলোড করে পোস্ট করুন','Could not share — download and post it'))}};
+// ---------- generated royalty-free music ----------
+function synth(a,d,dur){const m=a.createGain();m.gain.value=.3;m.connect(d);const n=(f,t,l,ty,v)=>{const o=a.createOscillator(),g=a.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+l);o.connect(g);g.connect(m);o.start(t);o.stop(t+l+.05)};
+  const t0=a.currentTime+.05,bt=.3,A=[220,261.63,329.63,261.63,196,246.94,293.66,246.94];for(let i=0;i*bt<dur;i++){const t=t0+i*bt;n(A[(Math.floor(i/4)%2)*4+i%4],t,.28,'triangle',.5);if(i%4==0)n(i%8<4?110:98,t,1.1,'sine',.9);if(i%2==0)n(60,t,.15,'sine',1)}n(880,t0,.6,'sine',.5)}
+// ---------- reel ----------
+$('mk').onclick=async()=>{
+  if(busy)return;if(!window.MediaRecorder){msg('এই ব্রাউজারে রিল রেকর্ডিং নেই — Chrome ব্যবহার করুন');return}
+  const prev=fmt;fmt=rsz;render();busy=true;const[RW,RH]=rsz.split('x').map(Number),sc=[...new Set([(SL[0]&&SL[0].im),...photos].filter(Boolean))].slice(0,4),o=opts(),multi=LAY[LAYK].n>1;let vid=null,dur=+V('dur');
+  $('mk').disabled=true;$('out').hidden=true;$('vdl').hidden=true;$('bar').style.display='block';msg('রিল তৈরি হচ্ছে… ট্যাব খোলা রাখুন');
+  if(vf){vid=document.createElement('video');vid.src=URL.createObjectURL(vf);vid.playsInline=true;await new Promise(r=>{vid.onloadeddata=r;vid.onerror=r});{const en=ve>vs?ve:(vid.duration||dur+vs);dur=clamp(en-vs,1,60)}vid.currentTime=vs;await new Promise(r=>{vid.onseeked=r;setTimeout(r,800)})}
+  const stream=cv.captureStream(30);let actx=null,au=null;
+  try{actx=new(window.AudioContext||window.webkitAudioContext)();const d=actx.createMediaStreamDestination();let any=false;
+    if(vid){actx.createMediaElementSource(vid).connect(d);any=true}
+    const mode=V('mm');if(mode==='file'&&$('mus').files[0]){au=new Audio(URL.createObjectURL($('mus').files[0]));au.loop=true;const s=actx.createMediaElementSource(au),gn=actx.createGain();gn.gain.value=vid?.4:1;s.connect(gn);gn.connect(d);any=true}else if(mode==='auto'){synth(actx,d,dur);any=true}
+    if(any)d.stream.getAudioTracks().forEach(x=>stream.addTrack(x))}catch(e){}
+  const mime=['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+  const rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:RW*RH>2.2e6?9e6:6e6}:{}),ch=[];rec.ondataavailable=e=>e.data.size&&ch.push(e.data);
+  rec.onstop=()=>{const type=rec.mimeType||'video/webm',mp=type.includes('mp4'),url=URL.createObjectURL(new Blob(ch,{type}));$('out').src=url;$('out').hidden=false;const a=$('vdl');a.href=url;a.download='newsmaker-reel-'+rsz+'.'+(mp?'mp4':'webm');a.textContent=T('⬇️ রিল ডাউনলোড (','⬇️ Download reel (')+(mp?'MP4':'WebM')+')';a.hidden=false;$('bar').style.display='none';msg('✅ রিল তৈরি হয়েছে');busy=false;$('mk').disabled=false;if(au)au.pause();if(vid)vid.pause();if(actx)actx.close();fmt=prev;drawIcons();render()};
+  rec.start(250);if(au)au.play().catch(()=>{});if(vid)vid.play();
+  const t0=performance.now(),n=Math.max(1,sc.length),len=dur/n;
+  (function loop(){const t=(performance.now()-t0)/1000;if(t>=dur){rec.stop();return}
+    let z,i=0,lt=0;const P0=[slotP(0)];if(vid){S={a:vid,b:null,mix:0,lay:'1',imgs:null,P:P0};z=1}else if(multi){const imgs=slotImgs();S={a:imgs[0],b:null,mix:0,lay:LAYK,imgs,P:imgs.map((_,k)=>slotP(k))};z=1.03+.07*(t/dur)}else{i=Math.min(n-1,Math.floor(t/len));lt=t-i*len;S={a:sc[i]||null,b:sc[i+1]||null,mix:Math.max(0,(lt-(len-.6))/.6),lay:'1',imgs:null,P:P0};z=1.04+.1*(lt/len)}
+    draw(RW,RH,o,z,{t,rv:clamp((t-.7)/1.8,0,1),prog:t/dur});$('bi').style.width=(t/dur*100)+'%';requestAnimationFrame(loop)})();
+};
+// preview: big at top, shrinks smoothly while scrolling down (phone layout only)
+const stk=document.querySelector('.sticky'),hd=document.querySelector('.head');
+const th=$('th'),sh=stk.querySelector('.hint');
+function fitPrev(){if(innerWidth>=900){cv.style.maxHeight='';th.style.maxHeight=th.style.opacity=sh.style.maxHeight=sh.style.opacity='';return}
+  const big=innerHeight*.52,mini=innerHeight*.24,y0=hd.getBoundingClientRect().bottom+scrollY+14-8,p=clamp((scrollY-y0)/220,0,1);
+  cv.style.maxHeight=Math.round(big-(big-mini)*p)+'px';th.style.maxHeight=Math.round(60*(1-p))+'px';th.style.opacity=1-p;sh.style.maxHeight=Math.round(22*(1-p))+'px';sh.style.opacity=1-p;sh.style.overflow='hidden'}
+addEventListener('scroll',fitPrev,{passive:true});addEventListener('resize',fitPrev);
+buildChips();syncSel();buildLays();buildSlots();syncSlot();applyLang();fitPrev();
+</script>
+</body>
+</html>
